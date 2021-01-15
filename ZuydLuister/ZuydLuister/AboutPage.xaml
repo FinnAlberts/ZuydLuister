@@ -5,8 +5,8 @@
 
     <StackLayout>
         <Label Text="Hier staat informatie over Zuyd L U I S T E R"/>
-        <Button x:Name="ContactButton" Text="Neem contact op" Clicked="ContactButton_Clicked"/>
-        <Button x:Name="WorkshopButton" Text="Workshops" Clicked="WorkshopButton_Clicked"/>
-        <Button x:Name="MoodleMOOIButton" Text="Moodle MOOI" Clicked="MoodleMOOIButton_Clicked"/>
+        <Button x:Name="contactButton" Text="Neem contact op" Clicked="contactButton_Clicked"/>
+        <Button x:Name="workshopButton" Text="Workshops" Clicked="workshopButton_Clicked"/>
+        <Button x:Name="moodleMOOIButton" Text="Moodle MOOI" Clicked="moodleMOOIButton_Clicked"/>
     </StackLayout>
 </ContentPage>

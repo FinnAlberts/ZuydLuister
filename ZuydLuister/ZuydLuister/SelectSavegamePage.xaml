@@ -2,11 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.SelectSavegamePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <StackLayout>
+        <Button x:Name="NewGameButton" Text="Nieuw Spel" Clicked="NewGameButton_Clicked"/>
+        <Button x:Name="SavegameButton" Text="Savegame 1" Clicked="SavegameButton_Clicked"/>
+    </StackLayout>
 </ContentPage>

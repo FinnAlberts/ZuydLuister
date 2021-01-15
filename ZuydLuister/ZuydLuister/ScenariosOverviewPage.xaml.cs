@@ -16,5 +16,15 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void scenarioListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
+
+        private void newScenarioButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EditScenarioPage());
+        }
     }
 }

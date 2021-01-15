@@ -16,5 +16,15 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void categorieListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
+
+        private void newCategoryButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EditCategoryPage());
+        }
     }
 }

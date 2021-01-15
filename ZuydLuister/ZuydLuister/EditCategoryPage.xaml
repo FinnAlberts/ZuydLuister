@@ -4,9 +4,9 @@
              x:Class="ZuydLuister.EditCategoryPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="nameEntry" Placeholder="Voer een categorienaam in..."/>
+            <Button x:Name="saveButton" Clicked="saveButton_Clicked"/>
+            <Button x:Name="deleteButton" Clicked="deleteButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

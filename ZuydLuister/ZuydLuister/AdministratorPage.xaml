@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ZuydLuister.AdministratorPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Button x:Name="adminScenarioButton" Text="Scenario's beheren" Clicked="adminScenarioButton_Clicked"/>
-            <Button x:Name="adminCategoryButton" Text="Puntcategorieën beheren"/>
-            <Button x:Name="adminAdministratorsButton" Text="Beheerders beheren"/>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             x:Class="ZuydLuister.AdministratorPage"
+             xmlns:local="clr-namespace:ZuydLuister">
+
+    <local:ScenariosOverviewPage Title="Scenario's"/>
+    <local:CategoryOverviewPage Title="Puntcategorieën"/>
+    <local:AdministratorOverviewPage Title="Beheerders"/>
+</TabbedPage>
+

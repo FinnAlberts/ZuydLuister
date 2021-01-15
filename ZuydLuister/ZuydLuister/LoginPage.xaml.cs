@@ -19,8 +19,8 @@ namespace ZuydLuister
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            var UsernameEmpty = string.IsNullOrEmpty(UsernameEntry.Text);
-            var PasswordEmpty = string.IsNullOrEmpty(PasswordEntry.Text);
+            var UsernameEmpty = string.IsNullOrEmpty(usernameEntry.Text);
+            var PasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
 
             if (UsernameEmpty || PasswordEmpty)
             {

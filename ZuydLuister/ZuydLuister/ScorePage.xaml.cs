@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,9 +23,10 @@ namespace ZuydLuister
 
         }
 
-        private void workshopsButton_Clicked(object sender, EventArgs e)
+        private async void workshopsButton_Clicked(object sender, EventArgs e)
         {
-
+            string link = "https://moodle.zuyd.nl/course/view.php?id=6992&sectionid=265207#section-16";
+            await Browser.OpenAsync(link, BrowserLaunchMode.SystemPreferred);
         }
 
         private void backToMenuButton_Clicked(object sender, EventArgs e)

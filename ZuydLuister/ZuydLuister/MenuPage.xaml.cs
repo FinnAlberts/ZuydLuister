@@ -24,7 +24,7 @@ namespace ZuydLuister
 
         async void LogoutButton_Clicked(object sender, EventArgs e)
         {
-            bool logout = await DisplayAlert("Uitloggen?", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
+            bool logout = await DisplayAlert("Uitloggen", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
 
             if (!logout)
             {

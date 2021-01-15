@@ -24,6 +24,10 @@ namespace ZuydLuister
 
             if (UsernameEmpty || PasswordEmpty)
             {
+                DisplayAlert("Login Error", "Beide velden moeten worden ingevuld.", "OK");
+            }
+            else
+            {
                 Navigation.PushAsync(new MenuPage());
             }
         }

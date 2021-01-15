@@ -19,12 +19,12 @@ namespace ZuydLuister
 
         private void saveAdminButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AdministratorOverviewPage());
+            Navigation.PopAsync();
         }
 
         private void deleteAdminButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AdministratorOverviewPage());
+            Navigation.PopAsync();
         }
     }
 }

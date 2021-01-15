@@ -5,8 +5,10 @@
 
     <StackLayout>
         <Entry x:Name="SavegameNameEntry" Placeholder="Naam..."/>
-        <Label Text="Wachtwoord?"/>
-        <CheckBox/>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+            <Label Text="Wachtwoord?"/>
+            <CheckBox/>
+        </StackLayout>
         <Entry x:Name="SavegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>
         <Entry x:Name="ConfirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True"/>
         <Label Text="Instructies:"/>

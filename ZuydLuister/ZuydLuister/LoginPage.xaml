@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.LoginPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <StackLayout>
+        <Label Text="Welkom bij Zuyd L U I S T E R" FontSize="Title"/>
+        <Label Text="Log in met je Zuyd-account"/>
+        <Entry x:Name="usernameEntry" Placeholder="Gebruikersnaam"/>
+        <Entry x:Name="passwordEntry" Placeholder="Wachtwoord" IsPassword="True"/>
+        <Button x:Name="loginButton" Text="Inloggen" Clicked="loginButton_Clicked"/>
+    </StackLayout>
 </ContentPage>

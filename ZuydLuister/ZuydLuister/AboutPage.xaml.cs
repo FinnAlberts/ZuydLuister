@@ -16,5 +16,20 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void ContactButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ContactPage());
+        }
+
+        private void WorkshopButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MoodleMOOIButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

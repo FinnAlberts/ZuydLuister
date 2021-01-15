@@ -15,6 +15,7 @@ namespace ZuydLuister
         public SelectSavegamePage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void NewGameButton_Clicked(object sender, EventArgs e)

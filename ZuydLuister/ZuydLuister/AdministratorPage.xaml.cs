@@ -15,6 +15,7 @@ namespace ZuydLuister
         public AdministratorPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void adminScenarioButton_Clicked(object sender, EventArgs e)

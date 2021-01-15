@@ -15,6 +15,7 @@ namespace ZuydLuister
         public AboutPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void ContactButton_Clicked(object sender, EventArgs e)

@@ -36,6 +36,5 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
-        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 </ContentPage>

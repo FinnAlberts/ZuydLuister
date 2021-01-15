@@ -4,9 +4,16 @@
              x:Class="ZuydLuister.CategoryOverviewPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="categoryListView" ItemTapped="categorieListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}" Style="{StaticResource}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="newCategoryButton" Clicked="newCategoryButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

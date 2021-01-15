@@ -17,9 +17,19 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void loginButton_Clicked(object sender, EventArgs e)
+        private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MenuPage());
+            var UsernameEmpty = string.IsNullOrEmpty(UsernameEntry.Text);
+            var PasswordEmpty = string.IsNullOrEmpty(PasswordEntry.Text);
+
+            if (UsernameEmpty || PasswordEmpty)
+            {
+                DisplayAlert("Login Error", "Beide velden moeten worden ingevuld.", "OK");
+            }
+            else
+            {
+                Navigation.PushAsync(new MenuPage());
+            }
         }
     }
 }

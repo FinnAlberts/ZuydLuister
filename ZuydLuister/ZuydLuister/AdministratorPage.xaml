@@ -7,5 +7,9 @@
     <local:ScenariosOverviewPage Title="Scenario's"/>
     <local:CategoryOverviewPage Title="Puntcategorieën"/>
     <local:AdministratorOverviewPage Title="Beheerders"/>
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+    </TabbedPage.ToolbarItems>
 </TabbedPage>
 

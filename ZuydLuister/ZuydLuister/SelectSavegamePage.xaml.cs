@@ -26,5 +26,10 @@ namespace ZuydLuister
         {
             Navigation.PushAsync(new NewSavegamePage());
         }
+
+        private void menuToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
     }
 }

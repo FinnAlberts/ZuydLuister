@@ -9,4 +9,8 @@
         <Button x:Name="WorkshopButton" Text="Workshops" Clicked="WorkshopButton_Clicked"/>
         <Button x:Name="MoodleMOOIButton" Text="Moodle MOOI" Clicked="MoodleMOOIButton_Clicked"/>
     </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>        
+    </ContentPage.ToolbarItems>
 </ContentPage>

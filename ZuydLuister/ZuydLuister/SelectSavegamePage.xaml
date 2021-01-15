@@ -7,4 +7,8 @@
         <Button x:Name="NewGameButton" Text="Nieuw Spel" Clicked="NewGameButton_Clicked"/>
         <Button x:Name="SavegameButton" Text="Savegame 1" Clicked="SavegameButton_Clicked"/>
     </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

@@ -13,4 +13,9 @@
         <Label Text="Hier staan de instructies voor het spel"/>
         <Button x:Name="StartButton" Text="Start" Clicked="StartButton_Clicked"/>
     </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

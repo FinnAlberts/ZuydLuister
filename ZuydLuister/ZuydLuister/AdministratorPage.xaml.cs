@@ -16,5 +16,10 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void adminScenarioButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

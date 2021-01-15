@@ -4,9 +4,9 @@
              x:Class="ZuydLuister.AdministratorPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="adminScenarioButton" Text="Scenario's beheren" Clicked="adminScenarioButton_Clicked"/>
+            <Button x:Name="adminCategoryButton" Text="Puntcategorieën beheren"/>
+            <Button x:Name="adminAdministratorsButton" Text="Beheerders beheren"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

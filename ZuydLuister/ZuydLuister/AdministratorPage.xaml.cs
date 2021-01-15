@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace ZuydLuister
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdministratorPage : ContentPage
+    public partial class AdministratorPage : TabbbedPage
     {
         public AdministratorPage()
         {

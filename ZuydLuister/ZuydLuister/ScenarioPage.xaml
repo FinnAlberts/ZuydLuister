@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="scenarioLabel" Text="Hier staat het scenario" FontSize="Title" Margin="50,50"/>
-            <Button x:Name="answerButton" Text="Optie A"/>
+            <Button x:Name="answerButton" Text="Optie A" Clicked="answerButton_Clicked"/>
 
         </StackLayout>
     </ContentPage.Content>

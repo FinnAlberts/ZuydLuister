@@ -10,16 +10,21 @@ using Xamarin.Forms.Xaml;
 namespace ZuydLuister
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ContactPage : ContentPage
+    public partial class EditSavegamePage : ContentPage
     {
-        public ContactPage()
+        public EditSavegamePage()
         {
             InitializeComponent();
         }
 
-        private void sendEmailButton_Clicked(object sender, EventArgs e)
+        private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MenuPage());
+
+        }
+
+        private void deleteSavegameButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SelectSavegamePage());
         }
     }
 }

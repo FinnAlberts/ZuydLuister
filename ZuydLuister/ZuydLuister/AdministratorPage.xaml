@@ -8,3 +8,4 @@
     <local:CategoryOverviewPage Title="Puntcategorieën"/>
     <local:AdministratorOverviewPage Title="Beheerders"/>
 </TabbedPage>
+

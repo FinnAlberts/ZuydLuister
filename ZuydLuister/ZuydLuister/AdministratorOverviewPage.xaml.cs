@@ -16,5 +16,15 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void adminListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
+
+        private void newAdminButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EditAdministratorPage());
+        }
     }
 }

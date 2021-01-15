@@ -4,9 +4,16 @@
              x:Class="ZuydLuister.ScenariosOverviewPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="scenarioListView" ItemTapped="scenarioListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}" Style="{StaticResource}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="newScenarioButton" Clicked="newScenarioButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

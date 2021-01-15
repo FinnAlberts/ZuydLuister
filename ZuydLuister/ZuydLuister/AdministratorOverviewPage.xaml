@@ -4,9 +4,16 @@
              x:Class="ZuydLuister.AdministratorOverviewPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="adminListView" ItemTapped="adminListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}" Style="{StaticResource}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="newAdminButton" Clicked="newAdminButton_Clicked"/>        
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

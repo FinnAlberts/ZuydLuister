@@ -3,6 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor">#e29626</Color>
+            <Color x:Key="TextColor">#ffffff</Color>
 
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+            <Style TargetType="NavigationPage"  ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="Label" ApplyToDerivedTypes="True">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

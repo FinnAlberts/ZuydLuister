@@ -15,6 +15,7 @@ namespace ZuydLuister
         public ScenarioPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void answerButton_Clicked(object sender, EventArgs e)

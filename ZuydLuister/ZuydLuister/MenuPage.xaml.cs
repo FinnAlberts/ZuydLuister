@@ -15,6 +15,7 @@ namespace ZuydLuister
         public MenuPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void adminButton_Clicked(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace ZuydLuister
 
         async void logoutButton_Clicked(object sender, EventArgs e)
         {
-            bool logout = await DisplayAlert("Uitloggen?", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
+            bool logout = await DisplayAlert("Uitloggen", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
 
             if (!logout)
             {

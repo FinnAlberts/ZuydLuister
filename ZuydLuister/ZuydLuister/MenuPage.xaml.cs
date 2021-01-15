@@ -26,7 +26,7 @@ namespace ZuydLuister
         {
             bool logout = await DisplayAlert("Uitloggen?", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
 
-            if (logout)
+            if (!logout)
             {
                 Navigation.PopToRootAsync();
             }

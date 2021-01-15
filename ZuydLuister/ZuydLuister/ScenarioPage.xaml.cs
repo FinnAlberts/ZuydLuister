@@ -18,6 +18,16 @@ namespace ZuydLuister
             NavigationPage.SetHasBackButton(this, false);
         }
 
+        private void menuToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
+
+        private void editToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EditSavegamePage());
+        }
+        
         private void answerButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ScorePage());

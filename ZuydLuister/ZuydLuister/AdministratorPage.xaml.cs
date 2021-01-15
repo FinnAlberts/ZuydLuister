@@ -22,5 +22,10 @@ namespace ZuydLuister
         {
 
         }
+
+        private void menuToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
     }
 }

@@ -13,4 +13,8 @@
             <Button x:Name="deleteAdminButton" Text="Verwijder beheerder" Clicked="deleteAdminButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

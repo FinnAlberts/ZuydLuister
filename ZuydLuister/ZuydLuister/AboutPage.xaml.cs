@@ -34,5 +34,10 @@ namespace ZuydLuister
             string link = "https://moodle.zuyd.nl/course/view.php?id=6992&sectionid=259691#section-2";
             await Browser.OpenAsync(link, BrowserLaunchMode.SystemPreferred);
         }
+
+        private void menuToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
     }
 }

@@ -13,4 +13,8 @@
             <Button x:Name="deleteSavegameButton" Text="Verwijder savegame" Clicked="deleteSavegameButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

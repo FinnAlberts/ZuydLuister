@@ -15,5 +15,5 @@
             </ListView>
             <Button x:Name="newAdminButton" Text="Nieuwe beheerder toevoegen" Clicked="newAdminButton_Clicked"/>        
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>    
 </ContentPage>

@@ -13,4 +13,8 @@
             </ListView.ItemsSource>
         </ListView>
     </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

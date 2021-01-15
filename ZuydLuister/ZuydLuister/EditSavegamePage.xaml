@@ -4,11 +4,11 @@
              x:Class="ZuydLuister.EditSavegamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="SavegameNameEntry" Placeholder="Naam..."/>
+            <Entry x:Name="savegameNameEntry" Placeholder="Naam..."/>
             <Label Text="Wachtwoord?"/>
             <CheckBox/>
-            <Entry x:Name="SavegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>
-            <Entry x:Name="ConfirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True"/>
+            <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>
+            <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True"/>
             <Button x:Name="saveEditSavegameButton" Text="Opslaan" Clicked="saveEditSavegameButton_Clicked"/>
             <Button x:Name="deleteSavegameButton" Text="Verwijder savegame" Clicked="deleteSavegameButton_Clicked"/>
         </StackLayout>

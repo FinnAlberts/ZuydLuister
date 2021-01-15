@@ -17,18 +17,18 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void ContactButton_Clicked(object sender, EventArgs e)
+        private void contactButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ContactPage());
         }
 
-        private async void WorkshopButton_Clicked(object sender, EventArgs e)
+        private async void workshopButton_Clicked(object sender, EventArgs e)
         {
             string link = "https://moodle.zuyd.nl/course/view.php?id=6992&sectionid=265207#section-16";
             await Browser.OpenAsync(link, BrowserLaunchMode.SystemPreferred);
         }
 
-        private async void MoodleMOOIButton_Clicked(object sender, EventArgs e)
+        private async void moodleMOOIButton_Clicked(object sender, EventArgs e)
         {
             string link = "https://moodle.zuyd.nl/course/view.php?id=6992&sectionid=259691#section-2";
             await Browser.OpenAsync(link, BrowserLaunchMode.SystemPreferred);

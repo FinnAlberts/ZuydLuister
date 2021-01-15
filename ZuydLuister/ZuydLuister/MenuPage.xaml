@@ -5,9 +5,9 @@
 
     <StackLayout>
         <Label Text="Welkom gebruiker"/>
-        <Button x:Name="AboutButton" Text="Wat is Zuyd L U I S T E R?" Clicked="AboutButton_Clicked"/>
-        <Button x:Name="PlayButton" Text="Speel" Clicked="PlayButton_Clicked"/>
-        <Button x:Name="LogoutButton" Text="Uitloggen" Clicked="LogoutButton_Clicked"/>
-        <Button x:Name="AdminButton" Text="Beheer" Clicked="AdminButton_Clicked"/>
+        <Button x:Name="aboutButton" Text="Wat is Zuyd L U I S T E R?" Clicked="aboutButton_Clicked"/>
+        <Button x:Name="playButton" Text="Speel" Clicked="playButton_Clicked"/>
+        <Button x:Name="logoutButton" Text="Uitloggen" Clicked="logoutButton_Clicked"/>
+        <Button x:Name="adminButton" Text="Beheer" Clicked="adminButton_Clicked"/>
     </StackLayout>
 </ContentPage>

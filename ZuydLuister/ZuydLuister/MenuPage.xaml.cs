@@ -17,12 +17,12 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void AdminButton_Clicked(object sender, EventArgs e)
+        private void adminButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AdministratorPage());
         }
 
-        async void LogoutButton_Clicked(object sender, EventArgs e)
+        async void logoutButton_Clicked(object sender, EventArgs e)
         {
             bool logout = await DisplayAlert("Uitloggen?", "Weet je zeker dat je wilt uitloggen?", "Nee", "Ja");
 
@@ -32,12 +32,12 @@ namespace ZuydLuister
             }
         }
 
-        private void PlayButton_Clicked(object sender, EventArgs e)
+        private void playButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SelectSavegamePage());
         }
 
-        private void AboutButton_Clicked(object sender, EventArgs e)
+        private void aboutButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AboutPage());
         }

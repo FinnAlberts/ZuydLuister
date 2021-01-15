@@ -13,7 +13,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="newAdminButton" Clicked="newAdminButton_Clicked"/>        
+            <Button x:Name="newAdminButton" Text="Nieuwe beheerder toevoegen" Clicked="newAdminButton_Clicked"/>        
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

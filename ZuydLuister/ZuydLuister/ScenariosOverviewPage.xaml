@@ -13,7 +13,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="newScenarioButton" Clicked="newScenarioButton_Clicked"/>
+            <Button x:Name="newScenarioButton" Text="Nieuw Scenario Toevoegen" Clicked="newScenarioButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

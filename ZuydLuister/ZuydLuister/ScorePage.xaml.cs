@@ -16,5 +16,21 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void contactButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ContactPage());
+
+        }
+
+        private void workshopsButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void backToMenuButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
     }
 }

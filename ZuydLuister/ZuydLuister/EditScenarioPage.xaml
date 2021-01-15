@@ -29,6 +29,8 @@
                     </Picker.Items>
                 </Picker>
             </StackLayout>
+            <Button x:Name="saveButton" Text="Sla scenario op" Clicked="saveButton_Clicked"/>
+            <Button x:Name="deleteButton" Text="Verwijder scenario" Clicked="deleteButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

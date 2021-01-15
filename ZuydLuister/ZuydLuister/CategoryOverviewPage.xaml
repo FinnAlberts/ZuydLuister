@@ -13,7 +13,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="newCategoryButton" Clicked="newCategoryButton_Clicked"/>
+            <Button x:Name="newCategoryButton" Text="Nieuwe categorie toevoegen" Clicked="newCategoryButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

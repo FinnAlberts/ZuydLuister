@@ -4,9 +4,9 @@
              x:Class="ZuydLuister.ScenarioPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="scenarioLabel" Text="Hier staat het scenario" FontSize="Title" Margin="50,50"/>
+            <Button x:Name="answerButton" Text="Optie A"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

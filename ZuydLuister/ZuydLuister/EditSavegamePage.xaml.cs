@@ -10,16 +10,21 @@ using Xamarin.Forms.Xaml;
 namespace ZuydLuister
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdministratorPage : TabbedPage
+    public partial class EditSavegamePage : ContentPage
     {
-        public AdministratorPage()
+        public EditSavegamePage()
         {
             InitializeComponent();
         }
 
-        private void adminScenarioButton_Clicked(object sender, EventArgs e)
+        private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void deleteSavegameButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SelectSavegamePage());
         }
     }
 }

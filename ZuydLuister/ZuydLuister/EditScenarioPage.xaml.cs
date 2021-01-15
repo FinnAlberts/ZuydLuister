@@ -16,5 +16,15 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void saveButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ScenariosOverviewPage());
+        }
+
+        private void deleteButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ScenariosOverviewPage());
+        }
     }
 }

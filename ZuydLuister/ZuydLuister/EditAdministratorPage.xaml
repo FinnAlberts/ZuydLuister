@@ -9,8 +9,8 @@
                 <Label Text="Hoofdbeheerder"/>
                 <CheckBox x:Name="masterAdminCheckBox"/>
             </StackLayout>
-            <Button x:Name="saveAdminButton" Clicked="saveAdminButton_Clicked"/>
-            <Button x:Name="deleteAdminButton" Clicked="deleteAdminButton_Clicked"/>
+            <Button x:Name="saveAdminButton" Text="Sla beheerder op" Clicked="saveAdminButton_Clicked"/>
+            <Button x:Name="deleteAdminButton" Text="Verwijder beheerder" Clicked="deleteAdminButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

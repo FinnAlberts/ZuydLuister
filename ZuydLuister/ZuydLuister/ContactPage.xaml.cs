@@ -16,5 +16,10 @@ namespace ZuydLuister
         {
             InitializeComponent();
         }
+
+        private void sendEmailButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MenuPage());
+        }
     }
 }

@@ -6,8 +6,8 @@
     <StackLayout>
         <Label Text="Welkom bij Zuyd L U I S T E R" FontSize="Title"/>
         <Label Text="Log in met je Zuyd-account"/>
-        <Entry x:Name="usernameEntry" Placeholder="Gebruikersnaam"/>
-        <Entry x:Name="passwordEntry" Placeholder="Wachtwoord" IsPassword="True"/>
+        <Entry x:Name="usernameEntry" Placeholder="Gebruikersnaam..."/>
+        <Entry x:Name="passwordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>
         <Button x:Name="loginButton" Text="Inloggen" Clicked="loginButton_Clicked"/>
     </StackLayout>
 </ContentPage>

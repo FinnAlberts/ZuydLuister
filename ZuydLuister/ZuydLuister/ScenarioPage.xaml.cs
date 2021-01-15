@@ -26,5 +26,10 @@ namespace ZuydLuister
         {
             Navigation.PushAsync(new EditSavegamePage());
         }
+        
+        private void answerButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ScorePage());
+        }
     }
 }

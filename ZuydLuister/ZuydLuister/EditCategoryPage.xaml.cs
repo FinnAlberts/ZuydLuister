@@ -19,12 +19,12 @@ namespace ZuydLuister
 
         private void saveButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CategoryOverviewPage());
+            Navigation.PopAsync();
         }
 
         private void deleteButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CategoryOverviewPage());
+            Navigation.PopAsync();
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

@@ -4,8 +4,14 @@
              x:Class="ZuydLuister.SelectSavegamePage">
 
     <StackLayout>
-        <Button x:Name="NewGameButton" Text="Nieuw Spel" Clicked="NewGameButton_Clicked"/>
-        <Button x:Name="SavegameButton" Text="Savegame 1" Clicked="SavegameButton_Clicked"/>
+        <Button x:Name="newGameButton" Text="Nieuw Spel" Clicked="newGameButton_Clicked"/>
+        <ListView x:Name="savegameListView" ItemSelected="savegameListView_ItemSelected">
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Savegame 1</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+        </ListView>
     </StackLayout>
 
     <ContentPage.ToolbarItems>

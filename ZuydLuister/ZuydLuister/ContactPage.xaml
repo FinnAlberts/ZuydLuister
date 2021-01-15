@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry x:Name="emailEntry" Placeholder="Emailadres..."/>
-            <Editor x:Name="emailEditor" Placeholder="Typ hier je bericht" HeightRequest="250"/>
+            <Editor x:Name="emailEditor" Placeholder="Typ hier je bericht..." HeightRequest="250"/>
             <Button x:Name="sendEmailButton" Text="Verzend bericht" Clicked="sendEmailButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

@@ -17,14 +17,14 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void SavegameButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new ScenarioPage());
-        }
-
-        private void NewGameButton_Clicked(object sender, EventArgs e)
+        private void newGameButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NewSavegamePage());
+        }
+
+        private void savegameListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Navigation.PushAsync(new ScenarioPage());
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

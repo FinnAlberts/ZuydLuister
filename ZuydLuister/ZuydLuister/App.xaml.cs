@@ -8,6 +8,7 @@ namespace ZuydLuister
     {
         public static string UserDatabaseLocation = string.Empty;
         public static string GameDatabaseLocation = string.Empty;
+        
         public App()
         {
             InitializeComponent();

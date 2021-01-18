@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Environment = System.Environment;
+using System.IO;
 
 namespace ZuydLuister.Droid
 {
@@ -21,7 +23,15 @@ namespace ZuydLuister.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            string userDBName = "UserDatabase.sqlite";
+            string userfolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string userfullPath = Path.Combine(userfolderPath, userDBName);
+
+            string gameDBName = "GameDatabase.sqlite";
+            string gamefolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string gamefullPath = Path.Combine(gamefolderPath, gameDBName);
+            LoadApplication(new App(userfullPath, gamefullPath));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

@@ -13,5 +13,7 @@ namespace ZuydLuister
         public string AnswerContent { get; set; }
 
         public int AnswerScore { get; set; }
+        
+        public int ScenarioId { get; set; }
     }
 }

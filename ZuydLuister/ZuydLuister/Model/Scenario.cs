@@ -13,6 +13,8 @@ namespace ZuydLuister
         public string ScenarioName { get; set; }
 
         public string ScenarioContent { get; set; }
+        
+        public int ScoreCategoryId { get; set; }
 
         public string ScenarioImage { get; set; }
     }

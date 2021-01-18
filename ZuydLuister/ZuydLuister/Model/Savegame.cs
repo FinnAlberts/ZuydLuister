@@ -14,6 +14,6 @@ namespace ZuydLuister
 
         public string SavegamePassword { get; set; } 
         
-        public string ScenarioId { get; set; } 
+        public int ScenarioId { get; set; } 
     }
 }

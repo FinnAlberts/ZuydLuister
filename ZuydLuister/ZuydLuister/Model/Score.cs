@@ -9,6 +9,10 @@ namespace ZuydLuister
     {
         [PrimaryKey, AutoIncrement]
         public int ScoreId { get; set; }
+        
+        public int ScoreCategoryId { get; set; }
+        
+        public int SavegameId { get; set; }
 
         public int AchievedScore { get; set; }
 

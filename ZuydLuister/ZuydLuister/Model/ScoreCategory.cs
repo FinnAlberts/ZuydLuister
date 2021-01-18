@@ -9,6 +9,7 @@ namespace ZuydLuister
     {
         [PrimaryKey, AutoIncrement]
         public int ScoreCategoryId { get; set; }
+        
         public string ScoreCategoryName { get; set; }
     }
 }

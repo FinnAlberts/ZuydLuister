@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
@@ -23,7 +24,16 @@ namespace ZuydLuister.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            string userDBName = "UserDatabase";
+            string userFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..", "Library");
+            string userFullPath = Path.Combine(userFolderPath, userDBName);
+
+            string gameDBName = "GameDatabase";
+            string gameFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..", "Library");
+            string gameFullPath = Path.Combine(gameFolderPath, gameDBName);
+
+            LoadApplication(new App(userFullPath, gameFullPath));
 
             return base.FinishedLaunching(app, options);
         }

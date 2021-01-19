@@ -8,7 +8,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding}" Style="{StaticResource}"/>
+                            <Label Text="{Binding ScoreCategoryName}"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

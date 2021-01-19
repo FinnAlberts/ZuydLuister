@@ -5,7 +5,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#e29626</Color>
-            <Color x:Key="TextColor">#ffffff</Color>
+            <Color x:Key="TextColor">#deedf4</Color>
+            <Color x:Key="ButtonColor">#deedf4</Color>
+            <Color x:Key="DarkColor">#000000</Color>
 
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
@@ -21,6 +23,11 @@
             </Style>
             <Style TargetType="Label" ApplyToDerivedTypes="True">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonColor}"/>
+                <Setter Property="BorderColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="BorderWidth" Value="2"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

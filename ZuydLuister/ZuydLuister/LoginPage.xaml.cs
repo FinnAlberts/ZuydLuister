@@ -24,7 +24,7 @@ namespace ZuydLuister
 
             if (UsernameEmpty || PasswordEmpty)
             {
-                DisplayAlert("Login Error", "Beide velden moeten worden ingevuld.", "OK");
+                DisplayAlert("Fout", "Beide velden moeten worden ingevuld.", "OK");
             }
             else
             {

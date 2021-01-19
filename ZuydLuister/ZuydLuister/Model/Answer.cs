@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
-namespace ZuydLuister
+namespace ZuydLuister.Model
 {
     public class Answer
     {
@@ -15,5 +15,7 @@ namespace ZuydLuister
         public int AnswerScore { get; set; }
         
         public int ScenarioId { get; set; }
+
+        public int NextScenarioId { get; set; }
     }
 }

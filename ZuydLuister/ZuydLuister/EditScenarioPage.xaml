@@ -3,35 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.EditScenarioPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="nameEntry" Placeholder="Voer een scenario naam in..."/>
-            <Editor x:Name="textEditor" Placeholder="Voer een scenario beschrijving in..."/>
-            <Entry x:Name="imageEntry" Placeholder="Voer een afbeelding url in..."/>
-            <Picker x:Name="scoreCategoryPicker" Title="Kies een scorecategorie">
-                <Picker.Items>
-                    <x:String/>
-                </Picker.Items>
-            </Picker>
-            <Picker x:Name="answerPicker" Title="Kies het aantal antwoorden">
-                <Picker.Items>
-                    <x:String>1</x:String>
-                    <x:String>2</x:String>
-                    <x:String>3</x:String>
-                    <x:String>4</x:String>
-                </Picker.Items>
-            </Picker>
-            <Entry x:Name="answerEntry" Placeholder="Voer een antwoord optie in..."/>
+        <ScrollView>
             <StackLayout>
-                <Entry x:Name="pointEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
-                <Picker x:Name="nextScenarioPicker" Title="Kies het volgende scenario">
+                <Entry x:Name="nameEntry" Placeholder="Voer een scenario naam in..."/>
+                <Editor x:Name="textEditor" Placeholder="Voer een scenario beschrijving in..."/>
+                <Entry x:Name="imageEntry" Placeholder="Voer een afbeelding url in..."/>
+                <Picker x:Name="scoreCategoryPicker" Title="Kies een scorecategorie" ItemDisplayBinding="{Binding ScoreCategoryName}"/>
+                <Picker x:Name="answerPicker" Title="Kies het aantal antwoorden" SelectedIndexChanged="answerPicker_SelectedIndexChanged">
                     <Picker.Items>
-                        <x:String></x:String>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
                     </Picker.Items>
                 </Picker>
+
+                <StackLayout x:Name="answerAStackLayout">
+                    <Entry x:Name="answerAEntry" Placeholder="Voer een antwoord optie in..."/>
+                    <StackLayout>
+                        <Entry x:Name="pointAEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
+                        <Picker x:Name="nextScenarioAPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="answerBStackLayout">
+                    <Entry x:Name="answerBEntry" Placeholder="Voer een antwoord optie in..."/>
+                    <StackLayout>
+                        <Entry x:Name="pointBEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
+                        <Picker x:Name="nextScenarioBPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="answerCStackLayout">
+                    <Entry x:Name="answerCEntry" Placeholder="Voer een antwoord optie in..."/>
+                    <StackLayout>
+                        <Entry x:Name="pointCEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
+                        <Picker x:Name="nextScenarioCPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="answerDStackLayout">
+                    <Entry x:Name="answerDEntry" Placeholder="Voer een antwoord optie in..."/>
+                    <StackLayout>
+                        <Entry x:Name="pointDEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
+                        <Picker x:Name="nextScenarioDPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button x:Name="saveButton" Text="Sla scenario op" Clicked="saveButton_Clicked"/>
+                <Button x:Name="deleteButton" Text="Verwijder scenario" Clicked="deleteButton_Clicked"/>
             </StackLayout>
-            <Button x:Name="saveButton" Text="Sla scenario op" Clicked="saveButton_Clicked"/>
-            <Button x:Name="deleteButton" Text="Verwijder scenario" Clicked="deleteButton_Clicked"/>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 
     <ContentPage.ToolbarItems>

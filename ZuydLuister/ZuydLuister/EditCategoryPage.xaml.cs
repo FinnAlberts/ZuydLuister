@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZuydLuister.Model;
 
 namespace ZuydLuister
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCategoryPage : ContentPage
     {
-        static ScoreCategory selectedCategory;
-        static bool isNew;
+        private ScoreCategory selectedCategory;
+        private bool isNew;
 
         public EditCategoryPage()
         {
@@ -53,12 +54,12 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een scorecategorie aangemaakt.", "OK");
+                        DisplayAlert("Gelukt", "Je hebt succesvol een scorecategorie aangemaakt.", "Oke");
                         Navigation.PopAsync();
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "OK");
+                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
                     }
                 }
                 else if (!found && !isNew)
@@ -68,13 +69,13 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt de categorie succesvol bijgewerkt.", "OK");
+                        DisplayAlert("Gelukt", "Je hebt de categorie succesvol bijgewerkt.", "Oke");
                         Navigation.PopAsync();
                     }
                 }
                 else if (found)
                 {
-                    DisplayAlert("Mislukt", "De ingevulde categorie bestaat al. Probeer een andere naam.", "OK");
+                    DisplayAlert("Mislukt", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
                 }
             }
         }
@@ -91,12 +92,12 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt deze categorie succesvol verwijderd.", "OK");
+                        DisplayAlert("Gelukt", "Je hebt deze categorie succesvol verwijderd.", "Oke");
                         Navigation.PopAsync();
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "OK");
+                        DisplayAlert("Mislukt", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "Oke");
                     }
                 }
             }

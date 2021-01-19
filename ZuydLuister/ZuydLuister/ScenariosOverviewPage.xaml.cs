@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZuydLuister.Model;
 
 namespace ZuydLuister
 {
@@ -17,9 +19,25 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void scenarioListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
 
+            using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+            {
+                connection.CreateTable<Scenario>();
+
+                var scenarios = connection.Table<Scenario>().ToList();
+
+                scenarioListView.ItemsSource = scenarios;
+            }
+        }
+
+        private void scenarioListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Scenario selectedScenario = scenarioListView.SelectedItem as Scenario;
+
+            Navigation.PushAsync(new EditScenarioPage(selectedScenario));
         }
 
         private void newScenarioButton_Clicked(object sender, EventArgs e)

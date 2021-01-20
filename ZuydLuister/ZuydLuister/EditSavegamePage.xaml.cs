@@ -13,12 +13,6 @@ namespace ZuydLuister
     public partial class EditSavegamePage : ContentPage
     {
         private Savegame selectedSavegame;
-        bool isChecked;
-
-        public EditSavegamePage()
-        {
-            InitializeComponent();
-        }
 
         public EditSavegamePage(Savegame savegameInput)
         {
@@ -26,6 +20,12 @@ namespace ZuydLuister
 
             selectedSavegame = savegameInput;
             savegameNameEntry.Text = savegameInput.SavegameName;
+            if (!String.IsNullOrEmpty(savegameInput.SavegamePassword))
+            {
+                passwordCheckBox.IsChecked = true;
+                savegamePasswordEntry.Text = savegameInput.SavegamePassword;
+                confirmSavegamePasswordEntry.Text = savegameInput.SavegamePassword;
+            }
         }
 
         private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
@@ -45,12 +45,30 @@ namespace ZuydLuister
                     }
                 }
 
-                if (!foundName && savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text && isChecked)
+                if (!foundName)
                 {
-                    //Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, SavegamePassword = savegamePasswordEntry.Text };
-
                     connection.CreateTable<Savegame>();
-                    int rows = connection.Update(selectedSavegame);
+
+                    selectedSavegame.SavegameName = savegameNameEntry.Text;
+
+                    int rows = 0;
+                    if (passwordCheckBox.IsChecked)
+                    {
+                        if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text)
+                        {
+                            selectedSavegame.SavegamePassword = savegamePasswordEntry.Text;
+                            rows = connection.Update(selectedSavegame);
+                        }
+                        else
+                        {
+                            DisplayAlert("Mislukt", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
+                        }
+                    }
+                    else
+                    {
+                        selectedSavegame.SavegamePassword = null;
+                        rows = connection.Update(selectedSavegame);
+                    }
 
                     if (rows > 0)
                     {
@@ -59,36 +77,7 @@ namespace ZuydLuister
                     }
                     else
                     {
-                        DisplayAlert("Fout", "Er is iets mis gegaan. Probeer het nog eens", "Oke");
-                    }
-                }
-                else if (!foundName && savegamePasswordEntry.Text != confirmSavegamePasswordEntry.Text && isChecked)
-                {
-                    DisplayAlert("Fout", "Je hebt twee verschillende wachtwoorden ingevuld. probeer het nog eens.", "Oke");
-                }
-                else if (!foundName && !isChecked)
-                {
-                    selectedSavegame.SavegameName = savegameNameEntry.Text;
-                    
-                    if (isChecked)
-                    {
-                        selectedSavegame.SavegamePassword = savegamePasswordEntry.Text;
-                    }
-                    else
-                    {
-                        selectedSavegame.SavegamePassword = null;
-                    }
-
-                    int rows = connection.Update(selectedSavegame);
-
-                    if (rows > 0)
-                    {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een savegame gewijzigd.", "Oke");
-                        Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        DisplayAlert("Fout", "Er is iets mis gegaan. Probeer het nog eens", "Oke");
+                        DisplayAlert("Fout", "Er is iets misgegaan. Probeer het nog eens", "Oke");
                     }
                 }
             }
@@ -102,13 +91,6 @@ namespace ZuydLuister
         private void menuToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new MenuPage());
-        }
-
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            isChecked = e.Value;
-            savegamePasswordEntry.IsVisible = e.Value;
-            confirmSavegamePasswordEntry.IsVisible = e.Value;
         }
     }
 }

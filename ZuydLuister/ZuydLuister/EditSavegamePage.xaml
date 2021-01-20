@@ -6,9 +6,9 @@
         <StackLayout>
             <Entry x:Name="savegameNameEntry" Text="{Binding SavegameName}"/>
             <Label Text="Wachtwoord?"/>
-            <CheckBox CheckedChanged="CheckBox_CheckedChanged"/>
-            <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="False"/>
-            <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="False"/>
+            <CheckBox x:Name="passwordCheckBox"/>
+            <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
+            <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
             <Button x:Name="saveEditSavegameButton" Text="Opslaan" Clicked="saveEditSavegameButton_Clicked"/>
             <Button x:Name="deleteSavegameButton" Text="Verwijder savegame" Clicked="deleteSavegameButton_Clicked"/>
         </StackLayout>

@@ -7,9 +7,7 @@
             <ListView x:Name="categoryListView" ItemTapped="categorieListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding ScoreCategoryName}"/>
-                        </ViewCell>
+                        <TextCell Text="{Binding ScoreCategoryName}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

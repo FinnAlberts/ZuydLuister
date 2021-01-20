@@ -18,37 +18,33 @@
                     </Picker.Items>
                 </Picker>
 
-                <StackLayout x:Name="answerAStackLayout">
-                    <Entry x:Name="answerAEntry" Placeholder="Voer een antwoord optie in..."/>
-                    <StackLayout>
-                        <Entry x:Name="pointAEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
-                        <Picker x:Name="nextScenarioAPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
-                    </StackLayout>
-                </StackLayout>
+                <Grid x:Name="answerAGrid">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Antwoord A" FontSize="Large"/>
+                    <Entry x:Name="answerAEntry" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Voer een antwoord optie in..."/>
+                    <Entry x:Name="pointAEntry" Grid.Row="2" Grid.Column="0" Placeholder="Aantal punten..." Keyboard="Numeric"/>
+                    <Picker x:Name="nextScenarioAPicker" Grid.Row="2" Grid.Column="1"  Title="Volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                </Grid>
 
-                <StackLayout x:Name="answerBStackLayout">
-                    <Entry x:Name="answerBEntry" Placeholder="Voer een antwoord optie in..."/>
-                    <StackLayout>
-                        <Entry x:Name="pointBEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
-                        <Picker x:Name="nextScenarioBPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
-                    </StackLayout>
-                </StackLayout>
+                <Grid x:Name="answerBGrid">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Antwoord B" FontSize="Large"/>
+                    <Entry x:Name="answerBEntry" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Voer een antwoord optie in..."/>
+                    <Entry x:Name="pointBEntry" Grid.Row="2" Grid.Column="0" Placeholder="Aantal punten..." Keyboard="Numeric"/>
+                    <Picker x:Name="nextScenarioBPicker" Grid.Row="2" Grid.Column="1"  Title="Volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                </Grid>
 
-                <StackLayout x:Name="answerCStackLayout">
-                    <Entry x:Name="answerCEntry" Placeholder="Voer een antwoord optie in..."/>
-                    <StackLayout>
-                        <Entry x:Name="pointCEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
-                        <Picker x:Name="nextScenarioCPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
-                    </StackLayout>
-                </StackLayout>
+                <Grid x:Name="answerCGrid">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Antwoord C" FontSize="Large"/>
+                    <Entry x:Name="answerCEntry" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Voer een antwoord optie in..."/>
+                    <Entry x:Name="pointCEntry" Grid.Row="2" Grid.Column="0" Placeholder="Aantal punten..." Keyboard="Numeric"/>
+                    <Picker x:Name="nextScenarioCPicker" Grid.Row="2" Grid.Column="1"  Title="Volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                </Grid>
 
-                <StackLayout x:Name="answerDStackLayout">
-                    <Entry x:Name="answerDEntry" Placeholder="Voer een antwoord optie in..."/>
-                    <StackLayout>
-                        <Entry x:Name="pointDEntry" Placeholder="Voer het aantal punten in..." Keyboard="Numeric"/>
-                        <Picker x:Name="nextScenarioDPicker" Title="Kies het volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
-                    </StackLayout>
-                </StackLayout>
+                <Grid x:Name="answerDGrid">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Antwoord D" FontSize="Large"/>
+                    <Entry x:Name="answerDEntry" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Voer een antwoord optie in..."/>
+                    <Entry x:Name="pointDEntry" Grid.Row="2" Grid.Column="0" Placeholder="Aantal punten..." Keyboard="Numeric"/>
+                    <Picker x:Name="nextScenarioDPicker" Grid.Row="2" Grid.Column="1"  Title="Volgende scenario" ItemDisplayBinding="{Binding ScenarioName}"/>
+                </Grid>
 
                 <Button x:Name="saveButton" Text="Sla scenario op" Clicked="saveButton_Clicked"/>
                 <Button x:Name="deleteButton" Text="Verwijder scenario" Clicked="deleteButton_Clicked"/>

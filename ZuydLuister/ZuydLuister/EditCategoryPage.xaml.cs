@@ -33,49 +33,55 @@ namespace ZuydLuister
 
         private void saveButton_Clicked(object sender, EventArgs e)
         {
-            using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+            if (String.IsNullOrEmpty(nameEntry.Text))
             {
-                connection.CreateTable<ScoreCategory>();
-                var categories = connection.Table<ScoreCategory>().ToList();
-                bool found = false;
-
-                foreach (var category in categories)
+                DisplayAlert("Fout", "Niet alle velden zijn ingevuld.", "Oke");
+            } else
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
-                    if (category.ScoreCategoryName == nameEntry.Text)
-                    {
-                        found = true;
-                    }
-                }
+                    connection.CreateTable<ScoreCategory>();
+                    var categories = connection.Table<ScoreCategory>().ToList();
+                    bool found = false;
 
-                if (!found && isNew)
-                {
-                    ScoreCategory category = new ScoreCategory() { ScoreCategoryName = nameEntry.Text };
-                    int rows = connection.Insert(category);
+                    foreach (var category in categories)
+                    {
+                        if (category.ScoreCategoryName == nameEntry.Text)
+                        {
+                            found = true;
+                        }
+                    }
 
-                    if (rows > 0)
+                    if (!found && isNew)
                     {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een scorecategorie aangemaakt.", "Oke");
-                        Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
-                    }
-                }
-                else if (!found && !isNew)
-                {
-                    selectedCategory.ScoreCategoryName = nameEntry.Text;
-                    int rows = connection.Update(selectedCategory);
+                        ScoreCategory category = new ScoreCategory() { ScoreCategoryName = nameEntry.Text };
+                        int rows = connection.Insert(category);
 
-                    if (rows > 0)
-                    {
-                        DisplayAlert("Gelukt", "Je hebt de categorie succesvol bijgewerkt.", "Oke");
-                        Navigation.PopAsync();
+                        if (rows > 0)
+                        {
+                            DisplayAlert("Succes", "Je hebt succesvol een scorecategorie aangemaakt.", "Oke");
+                            Navigation.PopAsync();
+                        }
+                        else
+                        {
+                            DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
+                        }
                     }
-                }
-                else if (found)
-                {
-                    DisplayAlert("Mislukt", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
+                    else if (!found && !isNew)
+                    {
+                        selectedCategory.ScoreCategoryName = nameEntry.Text;
+                        int rows = connection.Update(selectedCategory);
+
+                        if (rows > 0)
+                        {
+                            DisplayAlert("Succes", "Je hebt de categorie succesvol bijgewerkt.", "Oke");
+                            Navigation.PopAsync();
+                        }
+                    }
+                    else if (found)
+                    {
+                        DisplayAlert("Mislukt", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
+                    }
                 }
             }
         }

@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:ZuydLuister">
 
     <local:ScenariosOverviewPage Title="Scenario's"/>
-    <local:CategoryOverviewPage Title="Scorecategorieën"/>
+    <local:CategoryOverviewPage Title="Categorieën"/>
     <local:AdministratorOverviewPage Title="Beheerders"/>
 
     <TabbedPage.ToolbarItems>

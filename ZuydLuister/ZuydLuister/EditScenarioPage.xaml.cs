@@ -90,32 +90,44 @@ namespace ZuydLuister
                         answerAEntry.Text = scenarioAnswers[0].AnswerContent;
                         pointAEntry.Text = scenarioAnswers[0].AnswerScore.ToString();
 
-                        var nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[0].NextScenarioId select scenario).ToList()[0];
-                        nextScenarioAPicker.SelectedItem = nextScenario;
+                        var nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[0].NextScenarioId select scenario).ToList();
+                        if (nextScenario.Count != 0) // Check if referenced scenario still exists and is not deleted
+                        {
+                            nextScenarioAPicker.SelectedItem = nextScenario[0];
+                        }
 
                         if (scenarioAnswers.Count > 1) // Answer B
                         {
                             answerBEntry.Text = scenarioAnswers[1].AnswerContent;
                             pointBEntry.Text = scenarioAnswers[1].AnswerScore.ToString();
 
-                            nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[1].NextScenarioId select scenario).ToList()[0];
-                            nextScenarioBPicker.SelectedItem = nextScenario;
+                            nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[1].NextScenarioId select scenario).ToList();
+                            if (nextScenario.Count != 0) // Check if referenced scenario still exists and is not deleted
+                            {
+                                nextScenarioBPicker.SelectedItem = nextScenario[0];
+                            }
 
                             if (scenarioAnswers.Count > 2) // Answer C
                             {
                                 answerCEntry.Text = scenarioAnswers[2].AnswerContent;
                                 pointCEntry.Text = scenarioAnswers[2].AnswerScore.ToString();
 
-                                nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[2].NextScenarioId select scenario).ToList()[0];
-                                nextScenarioCPicker.SelectedItem = nextScenario;
+                                nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[2].NextScenarioId select scenario).ToList();
+                                if (nextScenario.Count != 0) // Check if referenced scenario still exists and is not deleted
+                                {
+                                    nextScenarioCPicker.SelectedItem = nextScenario[0];
+                                }
 
                                 if (scenarioAnswers.Count > 3) // Answer D
                                 {
                                     answerDEntry.Text = scenarioAnswers[3].AnswerContent;
                                     pointDEntry.Text = scenarioAnswers[3].AnswerScore.ToString();
 
-                                    nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[3].NextScenarioId select scenario).ToList()[0];
-                                    nextScenarioDPicker.SelectedItem = nextScenario;
+                                    nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[3].NextScenarioId select scenario).ToList();
+                                    if (nextScenario.Count != 0) // Check if referenced scenario still exists and is not deleted
+                                    {
+                                        nextScenarioDFixed Picker.SelectedItem = nextScenario[0];
+                                    }
                                 }
                             }
                         }

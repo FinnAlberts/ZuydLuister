@@ -7,7 +7,7 @@
             <ListView x:Name="scenarioListView" ItemSelected="scenarioListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding ScenarioName}"/>
+                        <TextCell Text="{Binding ScenarioName}" TextColor="{StaticResource TextColor}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

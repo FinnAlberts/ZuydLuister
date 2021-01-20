@@ -12,9 +12,19 @@ namespace ZuydLuister
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditSavegamePage : ContentPage
     {
+        private Savegame selectedSavegame;
+
         public EditSavegamePage()
         {
             InitializeComponent();
+        }
+
+        public EditSavegamePage(Savegame savegameInput)
+        {
+            InitializeComponent();
+
+            selectedSavegame = savegameInput;
+            savegameNameEntry.Text = savegameInput.SavegameName;
         }
 
         private void saveEditSavegameButton_Clicked(object sender, EventArgs e)

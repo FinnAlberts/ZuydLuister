@@ -7,10 +7,10 @@
         <Entry x:Name="savegameNameEntry" Placeholder="Naam..."/>
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
             <Label Text="Wachtwoord?"/>
-            <CheckBox/>
+            <CheckBox CheckedChanged="CheckBox_CheckedChanged"/>
         </StackLayout>
-        <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>
-        <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True"/>
+        <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="False"/>
+        <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="False"/>
         <Label Text="Instructies:"/>
         <Label Text="Hier staan de instructies voor het spel"/>
         <Button x:Name="startButton" Text="Start" Clicked="startButton_Clicked"/>

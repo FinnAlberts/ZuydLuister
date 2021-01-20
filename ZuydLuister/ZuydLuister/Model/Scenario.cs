@@ -17,5 +17,7 @@ namespace ZuydLuister.Model
         public int ScoreCategoryId { get; set; }
 
         public string ScenarioImage { get; set; }
+
+        public bool IsStartScenario { get; set; }
     }
 }

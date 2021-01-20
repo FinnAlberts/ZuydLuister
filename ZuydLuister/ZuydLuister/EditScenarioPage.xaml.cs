@@ -49,6 +49,7 @@ namespace ZuydLuister
                 nameEntry.Text = scenario.ScenarioName;
                 textEditor.Text = scenario.ScenarioContent;
                 imageEntry.Text = scenario.ScenarioImage;
+                startScenarioCheckBox.IsChecked = scenario.IsStartScenario;
             }
 
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
@@ -214,8 +215,19 @@ namespace ZuydLuister
                             DisplayAlert("Fout", "De opgegeven scenarionaam bestaat al. Kies een andere naam.", "Oke");
                         } else // Name does not yet exist
                         {
+                            // Check if new scenario is going to be the startScenario. If so, set all scenarios in the database to IsStartScenario is false
+                            if (startScenarioCheckBox.IsChecked)
+                            {
+                                var currentStartScenario = (from scenario in scenarios where scenario.IsStartScenario == true select scenario).ToList();
+                                foreach (Scenario startScenario in currentStartScenario)
+                                {
+                                    startScenario.IsStartScenario = false;
+                                    connection.Update(startScenario);
+                                }
+                            }
+                            
                             // Create a new scenario and insert it into the database
-                            scenario = new Scenario { ScenarioContent = textEditor.Text, ScenarioImage = imageEntry.Text, ScenarioName = nameEntry.Text, ScoreCategoryId = scoreCategory.ScoreCategoryId };
+                            scenario = new Scenario { ScenarioContent = textEditor.Text, ScenarioImage = imageEntry.Text, ScenarioName = nameEntry.Text, ScoreCategoryId = scoreCategory.ScoreCategoryId, IsStartScenario = startScenarioCheckBox.IsChecked };
                             int rows = connection.Insert(scenario);
 
                             // Read amount of answers from Picker
@@ -278,6 +290,20 @@ namespace ZuydLuister
                         scenario.ScenarioContent = textEditor.Text;
                         scenario.ScenarioImage = imageEntry.Text;
                         scenario.ScoreCategoryId = scoreCategory.ScoreCategoryId;
+                        scenario.IsStartScenario = startScenarioCheckBox.IsChecked;
+
+                        // Check if new scenario is going to be the startScenario. If so, set all scenarios in the database to IsStartScenario is false
+                        if (startScenarioCheckBox.IsChecked)
+                        {
+                            var scenarios = connection.Table<Scenario>().ToList();
+                            var currentStartScenario = (from scenario in scenarios where scenario.IsStartScenario == true select scenario).ToList();
+                            foreach (Scenario startScenario in currentStartScenario)
+                            {
+                                startScenario.IsStartScenario = false;
+                                connection.Update(startScenario);
+                            }
+                        }
+
                         int rows = connection.Update(scenario);
 
                         // Delete all answers and insert them again to deal with deletion/insertion of answers (amount of answers may change)

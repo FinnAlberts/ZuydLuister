@@ -6,7 +6,11 @@
         <ScrollView>
             <StackLayout>
                 <Entry x:Name="nameEntry" Placeholder="Voer een scenario naam in..."/>
-                <Editor x:Name="textEditor" Placeholder="Voer een scenario beschrijving in..."/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Startscenario"/>
+                    <CheckBox x:Name="startScenarioCheckBox"/>
+                </StackLayout>
+                <Editor x:Name="textEditor" Placeholder="Voer een scenario in..."/>
                 <Entry x:Name="imageEntry" Placeholder="Voer een afbeelding url in..."/>
                 <Picker x:Name="scoreCategoryPicker" Title="Kies een scorecategorie" ItemDisplayBinding="{Binding ScoreCategoryName}"/>
                 <Picker x:Name="answerPicker" Title="Kies het aantal antwoorden" SelectedIndexChanged="answerPicker_SelectedIndexChanged">

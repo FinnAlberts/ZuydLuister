@@ -61,6 +61,13 @@ namespace ZuydLuister
 
                 // Load scenarios into Pickers for selecting to which scenario the answer should take the player to
                 var scenarios = connection.Table<Scenario>().ToList();
+
+                // When editing a scenario, remove that scenario
+                if (!isNew)
+                {
+                    scenarios = (from scenario in scenarios where scenario.ScenarioId != this.scenario.ScenarioId select scenario).ToList();
+                }
+                
                 scenarios.Add(new Scenario { ScenarioName = "Ga naar het einde", ScenarioId = -1 });
                 nextScenarioAPicker.ItemsSource = scenarios;
                 nextScenarioBPicker.ItemsSource = scenarios;

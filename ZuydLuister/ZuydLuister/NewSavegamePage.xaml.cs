@@ -80,7 +80,7 @@ namespace ZuydLuister
             Navigation.PushAsync(new MenuPage());
         }
 
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void passwordCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             isChecked = e.Value;
             savegamePasswordEntry.IsVisible = e.Value;

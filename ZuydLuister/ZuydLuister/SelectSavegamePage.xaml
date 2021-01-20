@@ -6,11 +6,11 @@
     <StackLayout>
         <Button x:Name="newGameButton" Text="Nieuw Spel" Clicked="newGameButton_Clicked"/>
         <ListView x:Name="savegameListView" ItemSelected="savegameListView_ItemSelected">
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Savegame 1</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding SavegameName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
 

@@ -84,9 +84,27 @@ namespace ZuydLuister
             }
         }
 
-        private void deleteSavegameButton_Clicked(object sender, EventArgs e)
+        private async void deleteSavegameButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SelectSavegamePage());
+            var answer = await DisplayAlert("Verwijderen", "Weet je zeker dat je deze savegame wilt verwijderen?", "Nee", "Ja");
+            if (!answer)
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
+                {
+                    connection.CreateTable<Savegame>();
+                    int rows = connection.Delete(selectedSavegame);
+
+                    if (rows > 0)
+                    {
+                        DisplayAlert("Gelukt", "Je hebt deze savegame succesvol verwijderd.", "Oke");
+                        Navigation.PushAsync(new SelectSavegamePage());
+                    }
+                    else
+                    {
+                        DisplayAlert("Mislukt", "Er is iets misgegaan met het verwijderen. Probeer het nog eens.", "Oke");
+                    }
+                }
+            }
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

@@ -126,7 +126,7 @@ namespace ZuydLuister
                                     nextScenario = (from scenario in scenarios where scenario.ScenarioId == scenarioAnswers[3].NextScenarioId select scenario).ToList();
                                     if (nextScenario.Count != 0) // Check if referenced scenario still exists and is not deleted
                                     {
-                                        nextScenarioDFixed Picker.SelectedItem = nextScenario[0];
+                                        nextScenarioDPicker.SelectedItem = nextScenario[0];
                                     }
                                 }
                             }

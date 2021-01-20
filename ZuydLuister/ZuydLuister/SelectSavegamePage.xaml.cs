@@ -12,6 +12,8 @@ namespace ZuydLuister
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SelectSavegamePage : ContentPage
     {
+        public static Savegame currentSavegame;
+
         public SelectSavegamePage()
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace ZuydLuister
             if (savegameListView.SelectedItem != null)
             {
                 var selectedSavegame = savegameListView.SelectedItem as Savegame;
+                currentSavegame = selectedSavegame;
                 if (String.IsNullOrEmpty(selectedSavegame.SavegamePassword))
                 {
                     await Navigation.PushAsync(new ScenarioPage());

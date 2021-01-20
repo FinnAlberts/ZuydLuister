@@ -25,7 +25,7 @@ namespace ZuydLuister
 
         private void editToolbarItem_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new EditSavegamePage());
+            Navigation.PushAsync(new EditSavegamePage(SelectSavegamePage.currentSavegame));
         }
         
         private void answerButton_Clicked(object sender, EventArgs e)

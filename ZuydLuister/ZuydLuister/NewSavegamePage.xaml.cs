@@ -13,8 +13,6 @@ namespace ZuydLuister
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewSavegamePage : ContentPage
     {
-         bool isChecked = false;
-
         public NewSavegamePage()
         {
             InitializeComponent();
@@ -37,7 +35,7 @@ namespace ZuydLuister
                     }
                 }
 
-                if (!foundName && savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text && isChecked)
+                if (!foundName && savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text && passwordCheckBox.IsChecked)
                 {
                     Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, SavegamePassword = savegamePasswordEntry.Text};
 
@@ -50,14 +48,14 @@ namespace ZuydLuister
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens", "Oke");
+                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
                     }
                 }
-                else if (!foundName && savegamePasswordEntry.Text != confirmSavegamePasswordEntry.Text && isChecked)
+                else if (!foundName && savegamePasswordEntry.Text != confirmSavegamePasswordEntry.Text && passwordCheckBox.IsChecked)
                 {
                     DisplayAlert("Mislukt", "Je hebt twee verschillende wachtwoorden ingevuld. probeer het nog eens.", "Oke");
                 }
-                else if (!foundName && !isChecked)
+                else if (!foundName && !passwordCheckBox.IsChecked)
                 {
                     Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, SavegamePassword = null };
 
@@ -70,7 +68,7 @@ namespace ZuydLuister
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens", "Oke");
+                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
                     }
                 }
             }
@@ -79,13 +77,6 @@ namespace ZuydLuister
         private void menuToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new MenuPage());
-        }
-
-        private void passwordCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            isChecked = e.Value;
-            savegamePasswordEntry.IsVisible = e.Value;
-            confirmSavegamePasswordEntry.IsVisible = e.Value;
         }
     }
 }

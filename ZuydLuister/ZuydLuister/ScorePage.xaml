@@ -4,8 +4,14 @@
              x:Class="ZuydLuister.ScorePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="averageScoreLabel" Text="Je gemiddelde score is \\score\\" 
-                   HorizontalTextAlignment="Center" FontSize="Title"/>
+            <Label x:Name="averageScoreLabel" HorizontalTextAlignment="Center" FontSize="Title"/>
+            <ListView x:Name="scoreListView" ItemSelected="scoreListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding}" TextColor="{StaticResource TextColor}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Label x:Name="contactLabel" Text="Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder."
                    HorizontalTextAlignment="Center" FontSize="Body"/>
             <Button x:Name="contactButton" Text="Contact opnemen" Clicked="contactButton_Clicked"/>

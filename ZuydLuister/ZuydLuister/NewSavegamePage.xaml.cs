@@ -44,7 +44,7 @@ namespace ZuydLuister
                     if (rows > 0)
                     {
                         DisplayAlert("Gelukt", "Je hebt succesvol een savegame aangemaakt.", "Oke");
-                        Navigation.PushAsync(new ScenarioPage());
+                        Navigation.PushAsync(new ScenarioPage(savegame));
                     }
                     else
                     {
@@ -64,7 +64,7 @@ namespace ZuydLuister
                     if (rows > 0)
                     {
                         DisplayAlert("Gelukt", "Je hebt succesvol een savegame aangemaakt.", "Oke");
-                        Navigation.PushAsync(new ScenarioPage());
+                        Navigation.PushAsync(new ScenarioPage(savegame));
                     }
                     else
                     {

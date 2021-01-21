@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZuydLuister.Model;
 
 namespace ZuydLuister
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScorePage : ContentPage
     {
-        public ScorePage()
+        Savegame savegame;
+        public ScorePage(Savegame savegame)
         {
             InitializeComponent();
+            this.savegame = savegame;
             NavigationPage.SetHasBackButton(this, false);
         }
 

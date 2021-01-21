@@ -46,7 +46,7 @@ namespace ZuydLuister
                 currentSavegame = selectedSavegame;
                 if (String.IsNullOrEmpty(selectedSavegame.SavegamePassword))
                 {
-                    await Navigation.PushAsync(new ScenarioPage());
+                    await Navigation.PushAsync(new ScenarioPage(currentSavegame));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace ZuydLuister
                     {
                         if (password == selectedSavegame.SavegamePassword)
                         {
-                            await Navigation.PushAsync(new ScenarioPage());
+                            await Navigation.PushAsync(new ScenarioPage(currentSavegame));
                         }
                         else
                         {

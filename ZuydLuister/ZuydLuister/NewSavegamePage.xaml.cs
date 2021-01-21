@@ -46,7 +46,7 @@ namespace ZuydLuister
                 }
 
                 // Name is unique
-                if (!foundName /*&& savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text && passwordCheckBox.IsChecked*/)
+                if (!foundName)
                 {
                     Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, ScenarioId = startScenarioId };
                     bool passwordsMatch = true;
@@ -69,7 +69,7 @@ namespace ZuydLuister
                         if (rows > 0)
                         {
                             DisplayAlert("Succes", "Je hebt succesvol een savegame aangemaakt.", "Oke");
-                            Navigation.PushAsync(new ScenarioPage());
+                            Navigation.PushAsync(new ScenarioPage(savegame));
                         }
                         else
                         {

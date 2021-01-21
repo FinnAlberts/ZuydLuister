@@ -74,7 +74,7 @@ namespace ZuydLuister
                     if (rows > 0)
                     {
                         DisplayAlert("Gelukt", "Je hebt succesvol een savegame gewijzigd.", "Oke");
-                        Navigation.PushAsync(new ScenarioPage());
+                        Navigation.PopAsync();
                     }
                     else
                     {

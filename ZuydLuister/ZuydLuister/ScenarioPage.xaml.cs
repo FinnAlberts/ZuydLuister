@@ -113,9 +113,7 @@ namespace ZuydLuister
                         DisplayAlert("Fout", "Er is iets misgegaan bij het updaten van je savegame.", "Oke");
                     }                    
                 }
-            }
-
-            
+            }            
         }
     }
 }

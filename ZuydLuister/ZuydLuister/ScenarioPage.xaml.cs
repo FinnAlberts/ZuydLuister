@@ -27,7 +27,7 @@ namespace ZuydLuister
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+            base.OnAppearing();            
 
             // Check if game has been completed
             if (savegame.ScenarioId == -1)
@@ -40,18 +40,29 @@ namespace ZuydLuister
                     connection.CreateTable<Answer>();
                     connection.CreateTable<Scenario>();
                     var scenarios = connection.Table<Scenario>().ToList();
-                    currentScenario = (from scenario in scenarios where scenario.ScenarioId == savegame.ScenarioId select scenario).ToList()[0];
-                    scenarioLabel.Text = currentScenario.ScenarioContent;
-                    var answers = connection.Table<Answer>().ToList();
-                    var currentAnswers = (from answer in answers where answer.ScenarioId == currentScenario.ScenarioId select answer).ToList();
-                    foreach (Answer answer in currentAnswers)
+
+                    // Check if scenario hasn't been deleted
+                    int scenariosCount = (from scenario in scenarios where scenario.ScenarioId == savegame.ScenarioId select scenario).ToList().Count;
+
+                    if (scenariosCount == 0) // Scenario has been deleted
                     {
-                        if (maxScore < answer.AnswerScore)
-                        {
-                            maxScore = answer.AnswerScore;
-                        }
+                        Navigation.PushAsync(new ScorePage(savegame));
                     }
-                    answerListView.ItemsSource = currentAnswers;
+                    else // Scenario has not been deleted
+                    {
+                        currentScenario = (from scenario in scenarios where scenario.ScenarioId == savegame.ScenarioId select scenario).ToList()[0];
+                        scenarioLabel.Text = currentScenario.ScenarioContent;
+                        var answers = connection.Table<Answer>().ToList();
+                        var currentAnswers = (from answer in answers where answer.ScenarioId == currentScenario.ScenarioId select answer).ToList();
+                        foreach (Answer answer in currentAnswers)
+                        {
+                            if (maxScore < answer.AnswerScore)
+                            {
+                                maxScore = answer.AnswerScore;
+                            }
+                        }
+                        answerListView.ItemsSource = currentAnswers;
+                    }
                 }
             }
         }
@@ -108,7 +119,7 @@ namespace ZuydLuister
                 rows = connection.Update(savegame);
                 if (rows > 0)
                 {
-                    if (selectedAnswer.NextScenarioId == -1) //to do check if scenario exists
+                    if (selectedAnswer.NextScenarioId == -1) 
                     {
                         Navigation.PushAsync(new ScorePage(savegame));
                     } else

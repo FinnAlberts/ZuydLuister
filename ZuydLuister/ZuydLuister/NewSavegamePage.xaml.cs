@@ -20,6 +20,16 @@ namespace ZuydLuister
 
         private void startButton_Clicked(object sender, EventArgs e)
         {
+            // Find StartScenario
+            int startScenarioId;
+            using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+            {
+                connection.CreateTable<Scenario>();
+                var scenarios = connection.Table<Scenario>();
+                startScenarioId = (from scenario in scenarios where scenario.IsStartScenario == true select scenario.ScenarioId).ToList()[0];
+            }
+            
+            // Check if name is unique
             bool foundName = false;
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
             {
@@ -27,7 +37,7 @@ namespace ZuydLuister
                 var savegames = connection.Table<Savegame>().ToList();
                 foreach (Savegame savegame in savegames)
                 {
-                    if (savegameNameEntry.Text == savegame.SavegameName)
+                    if (savegameNameEntry.Text == savegame.SavegameName) // Name is not unique
                     {
                         foundName = true;
                         DisplayAlert("Mislukt", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
@@ -35,40 +45,40 @@ namespace ZuydLuister
                     }
                 }
 
-                if (!foundName && savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text && passwordCheckBox.IsChecked)
+                // Name is unique
+                if (!foundName)
                 {
-                    Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, SavegamePassword = savegamePasswordEntry.Text};
-
-                    int rows = connection.Insert(savegame);
-
-                    if (rows > 0)
+                    Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, ScenarioId = startScenarioId };
+                    bool passwordsMatch = true;
+                    if (passwordCheckBox.IsChecked) // A password will be set
                     {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een savegame aangemaakt.", "Oke");
-                        Navigation.PushAsync(new ScenarioPage(savegame));
+                        if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text) // Passwords match
+                        {
+                            savegame.SavegamePassword = savegamePasswordEntry.Text;
+                        } 
+                        else
+                        {
+                            passwordsMatch = false;
+                        }
                     }
+
+                    if (passwordsMatch) // Check if passwords match
+                    {
+                        int rows = connection.Insert(savegame);
+
+                        if (rows > 0)
+                        {
+                            DisplayAlert("Succes", "Je hebt succesvol een savegame aangemaakt.", "Oke");
+                            Navigation.PushAsync(new ScenarioPage(savegame));
+                        }
+                        else
+                        {
+                            DisplayAlert("Fout", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
+                        }
+                    } 
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
-                    }
-                }
-                else if (!foundName && savegamePasswordEntry.Text != confirmSavegamePasswordEntry.Text && passwordCheckBox.IsChecked)
-                {
-                    DisplayAlert("Mislukt", "Je hebt twee verschillende wachtwoorden ingevuld. probeer het nog eens.", "Oke");
-                }
-                else if (!foundName && !passwordCheckBox.IsChecked)
-                {
-                    Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, SavegamePassword = null };
-
-                    int rows = connection.Insert(savegame);
-
-                    if (rows > 0)
-                    {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een savegame aangemaakt.", "Oke");
-                        Navigation.PushAsync(new ScenarioPage(savegame));
-                    }
-                    else
-                    {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
+                        DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
                     }
                 }
             }

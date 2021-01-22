@@ -92,16 +92,24 @@ namespace ZuydLuister
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
                     connection.CreateTable<Savegame>();
+                    connection.CreateTable<Score>();
+                    var scores = connection.Table<Score>().ToList();
+                    var savegameScores = (from score in scores where score.SavegameId == selectedSavegame.SavegameId select score).ToList();
+                    foreach (Score score in savegameScores)
+                    {
+                        connection.Delete(score);
+                    }
+
                     int rows = connection.Delete(selectedSavegame);
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Succes", "Je hebt deze savegame succesvol verwijderd.", "Oke");
-                        Navigation.PushAsync(new SelectSavegamePage());
+                        await DisplayAlert("Succes", "Je hebt deze savegame succesvol verwijderd.", "Oke");
+                        await Navigation.PushAsync(new SelectSavegamePage());
                     }
                     else
                     {
-                        DisplayAlert("Fout", "Er is iets misgegaan met het verwijderen. Probeer het nog eens.", "Oke");
+                        await DisplayAlert("Fout", "Er is iets misgegaan met het verwijderen. Probeer het nog eens.", "Oke");
                     }
                 }
             }

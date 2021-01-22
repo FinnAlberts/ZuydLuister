@@ -107,12 +107,12 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Succes", "Je hebt deze categorie succesvol verwijderd.", "Oke");
-                        Navigation.PopAsync();
+                        await DisplayAlert("Succes", "Je hebt deze categorie succesvol verwijderd.", "Oke");
+                        await Navigation.PopAsync();
                     }
                     else
                     {
-                        DisplayAlert("Fout", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "Oke");
+                        await DisplayAlert("Fout", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "Oke");
                     }
                 }
             }

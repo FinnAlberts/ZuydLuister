@@ -27,6 +27,7 @@ namespace ZuydLuister
             base.OnAppearing();
             int maxScore = 0;
             int achievedScore = 0;
+            int scorePercentage = 0;
             List<string> scoreList = new List<string>();
             var myScores = new List<Score>();            
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
@@ -51,6 +52,24 @@ namespace ZuydLuister
             }
             scoreListView.ItemsSource = scoreList;
             averageScoreLabel.Text = "Je totale score is: " + achievedScore + "/" + maxScore;
+
+            scorePercentage = achievedScore * 100 / maxScore;
+            if (scorePercentage <= 25)
+            {
+                contactLabel.Text = "Het lijkt erop dat het niet zo goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
+            }
+            else if (scorePercentage <= 50) 
+            {
+                contactLabel.Text = "Het lijkt erop dat het minder goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
+            }
+            else if (scorePercentage <= 75)
+            {
+                contactLabel.Text = "Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+            }
+            else
+            {
+                contactLabel.Text = "Het lijkt erop dat het uitstekend met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+            }
         }
 
         private void contactButton_Clicked(object sender, EventArgs e)

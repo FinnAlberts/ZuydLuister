@@ -78,9 +78,12 @@ namespace ZuydLuister
                 if (!isNew)
                 {
                     // Select current ScoreCategory in Picker
-                    var selectedScoreCategory = (from scoreCategory in scoreCategories where scoreCategory.ScoreCategoryId == scenario.ScoreCategoryId select scoreCategory).ToList()[0];
+                    var selectedScoreCategory = (from scoreCategory in scoreCategories where scoreCategory.ScoreCategoryId == scenario.ScoreCategoryId select scoreCategory).ToList();
 
-                    scoreCategoryPicker.SelectedItem = selectedScoreCategory;
+                    if (selectedScoreCategory.Count != 0)
+                    {
+                        scoreCategoryPicker.SelectedItem = selectedScoreCategory[0];
+                    }                    
 
                     // Select correct amount of answers in Picker
                     connection.CreateTable<Answer>();

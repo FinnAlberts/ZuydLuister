@@ -44,10 +44,13 @@ namespace ZuydLuister
                 foreach (Score score in myScores)
                 {
                     var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId 
-                                        select category.ScoreCategoryName).ToList()[0];
-                    achievedScore += score.AchievedScore;
-                    maxScore += score.MaxScore;
-                    scoreList.Add(categoryName + ": " + score.AchievedScore + "/" + score.MaxScore);
+                                        select category.ScoreCategoryName).ToList();
+                    if (categoryName.Count != 0)
+                    {
+                        achievedScore += score.AchievedScore;
+                        maxScore += score.MaxScore;
+                        scoreList.Add(categoryName[0] + ": " + score.AchievedScore + "/" + score.MaxScore);
+                    }
                 }
             }
             scoreListView.ItemsSource = scoreList;

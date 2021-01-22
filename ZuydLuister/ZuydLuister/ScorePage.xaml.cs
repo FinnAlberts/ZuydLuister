@@ -43,9 +43,7 @@ namespace ZuydLuister
 
                 foreach (Score score in myScores)
                 {
-                    var categoryName = (from category in scoreCategories
-                                        where category.ScoreCategoryId == score.ScoreCategoryId
-                                        select category.ScoreCategoryName).ToList();
+                    var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId select category.ScoreCategoryName).ToList();
                     if (categoryName.Count != 0)
                     {
                         achievedScore += score.AchievedScore;

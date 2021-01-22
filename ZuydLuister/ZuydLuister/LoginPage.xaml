@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markupExtensions="clr-namespace:ZuydLuister.MarkupExtensions"
              x:Class="ZuydLuister.LoginPage">
 
     <StackLayout>
-        <Label Text="Welkom bij Zuyd L U I S T E R" FontSize="Title"/>
+        <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
+        <Label Text="Welkom!" FontSize="Title"/>
         <Label Text="Log in met je Zuyd-account"/>
         <Entry x:Name="usernameEntry" Placeholder="Gebruikersnaam..."/>
         <Entry x:Name="passwordEntry" Placeholder="Wachtwoord..." IsPassword="True"/>

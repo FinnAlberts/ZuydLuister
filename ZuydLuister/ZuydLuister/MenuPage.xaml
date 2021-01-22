@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:markupExtensions="clr-namespace:ZuydLuister.MarkupExtensions"
              x:Class="ZuydLuister.MenuPage">
 
     <StackLayout>
-        <Label Text="Welkom gebruiker"/>
+        <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
+        <Label Text="Welkom!"/>
         <Button x:Name="aboutButton" Text="Wat is Zuyd L U I S T E R?" Clicked="aboutButton_Clicked"/>
         <Button x:Name="playButton" Text="Speel" Clicked="playButton_Clicked"/>
         <Button x:Name="logoutButton" Text="Uitloggen" Clicked="logoutButton_Clicked"/>

@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:markupExtensions="clr-namespace:ZuydLuister.MarkupExtensions"
              x:Class="ZuydLuister.AboutPage">
 
     <StackLayout>
+        <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
         <Label Text="Hier staat informatie over Zuyd L U I S T E R"/>
         <Button x:Name="contactButton" Text="Neem contact op" Clicked="contactButton_Clicked"/>
         <Button x:Name="workshopButton" Text="Workshops" Clicked="workshopButton_Clicked"/>

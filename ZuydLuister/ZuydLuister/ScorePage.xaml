@@ -12,8 +12,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="contactLabel" Text="Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder."
-                   HorizontalTextAlignment="Center" FontSize="Body"/>
+            <Label x:Name="contactLabel" HorizontalTextAlignment="Center" FontSize="Body"/>
             <Button x:Name="contactButton" Text="Contact opnemen" Clicked="contactButton_Clicked"/>
             <Label x:Name="workshopsLabel" Text="Zuyd L U I S T E R biedt ook verschillende workshops. Bekijk hieronder het aanbod"
                    HorizontalTextAlignment="Center" FontSize="Body"/>

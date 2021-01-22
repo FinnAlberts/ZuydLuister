@@ -11,5 +11,7 @@ namespace ZuydLuister.Model
         public int ScoreCategoryId { get; set; }
         
         public string ScoreCategoryName { get; set; }
+
+        public string ScoreCategoryDescription { get; set; }
     }
 }

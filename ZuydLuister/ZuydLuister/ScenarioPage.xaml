@@ -4,7 +4,10 @@
              x:Class="ZuydLuister.ScenarioPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="scenarioLabel" FontSize="Title" Margin="50,50"/>
+            <Image x:Name="scenarioImage"/>
+            <ActivityIndicator IsVisible="{Binding Source={x:Reference scenarioImage}, Path=IsLoading}" IsRunning="{Binding Source={x:Reference scenarioImage}, Path=IsLoading}"/>
+
+            <Label x:Name="scenarioLabel" FontSize="Title"/>
             <ListView x:Name="answerListView" ItemSelected="answerListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>

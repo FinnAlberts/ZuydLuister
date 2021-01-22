@@ -51,6 +51,7 @@ namespace ZuydLuister
                     else // Scenario has not been deleted
                     {
                         currentScenario = (from scenario in scenarios where scenario.ScenarioId == savegame.ScenarioId select scenario).ToList()[0];
+                        scenarioImage.Source = currentScenario.ScenarioImage;
                         scenarioLabel.Text = currentScenario.ScenarioContent;
                         var answers = connection.Table<Answer>().ToList();
                         var currentAnswers = (from answer in answers where answer.ScenarioId == currentScenario.ScenarioId select answer).ToList();

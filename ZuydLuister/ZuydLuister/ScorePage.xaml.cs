@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,37 @@ namespace ZuydLuister
             InitializeComponent();
             this.savegame = savegame;
             NavigationPage.SetHasBackButton(this, false);
+        }
+
+        protected override void OnAppearing()
+        {            
+            base.OnAppearing();
+            int maxScore = 0;
+            int achievedScore = 0;
+            List<string> scoreList = new List<string>();
+            var myScores = new List<Score>();            
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
+            {
+                connection.CreateTable<Score>();
+                var scores = connection.Table<Score>().ToList();
+                myScores = (from score in scores where score.SavegameId == savegame.SavegameId select score).ToList();                
+            }
+            using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+            {
+                connection.CreateTable<ScoreCategory>();
+                var scoreCategories = connection.Table<ScoreCategory>().ToList();
+                
+                foreach (Score score in myScores)
+                {
+                    var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId 
+                                        select category.ScoreCategoryName).ToList()[0];
+                    achievedScore += score.AchievedScore;
+                    maxScore += score.MaxScore;
+                    scoreList.Add(categoryName + ": " + score.AchievedScore + "/" + score.MaxScore);
+                }
+            }
+            scoreListView.ItemsSource = scoreList;
+            averageScoreLabel.Text = "Je totale score is: " + achievedScore + "/" + maxScore;
         }
 
         private void contactButton_Clicked(object sender, EventArgs e)
@@ -46,6 +78,11 @@ namespace ZuydLuister
         private void editToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new EditSavegamePage(savegame));
-        }       
+        }
+
+        private void scoreListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
     }
 }

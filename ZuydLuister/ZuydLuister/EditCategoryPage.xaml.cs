@@ -64,7 +64,7 @@ namespace ZuydLuister
                         }
                         else
                         {
-                            DisplayAlert("Mislukt", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
+                            DisplayAlert("Fout", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
                         }
                     }
                     else if (!found && !isNew)
@@ -80,7 +80,7 @@ namespace ZuydLuister
                     }
                     else if (found)
                     {
-                        DisplayAlert("Mislukt", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
+                        DisplayAlert("Fout", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
                     }
                 }
             }
@@ -98,12 +98,12 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt deze categorie succesvol verwijderd.", "Oke");
+                        DisplayAlert("Succes", "Je hebt deze categorie succesvol verwijderd.", "Oke");
                         Navigation.PopAsync();
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "Oke");
+                        DisplayAlert("Fout", "Er is iets mis gegaan met het verwijderen. Probeer het nog eens.", "Oke");
                     }
                 }
             }

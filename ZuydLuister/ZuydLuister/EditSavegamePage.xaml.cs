@@ -41,7 +41,7 @@ namespace ZuydLuister
                     if (savegameNameEntry.Text == savegame.SavegameName && selectedSavegame.SavegameName != savegameNameEntry.Text)
                     {
                         foundName = true;
-                        DisplayAlert("Mislukt", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
+                        DisplayAlert("Fout", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
                         break;
                     }
                 }
@@ -62,7 +62,7 @@ namespace ZuydLuister
                         }
                         else
                         {
-                            DisplayAlert("Mislukt", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
+                            DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
                         }
                     }
                     else
@@ -73,7 +73,7 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt succesvol een savegame gewijzigd.", "Oke");
+                        DisplayAlert("Succes", "Je hebt succesvol een savegame gewijzigd.", "Oke");
                         Navigation.PopAsync();
                     }
                     else
@@ -96,12 +96,12 @@ namespace ZuydLuister
 
                     if (rows > 0)
                     {
-                        DisplayAlert("Gelukt", "Je hebt deze savegame succesvol verwijderd.", "Oke");
+                        DisplayAlert("Succes", "Je hebt deze savegame succesvol verwijderd.", "Oke");
                         Navigation.PushAsync(new SelectSavegamePage());
                     }
                     else
                     {
-                        DisplayAlert("Mislukt", "Er is iets misgegaan met het verwijderen. Probeer het nog eens.", "Oke");
+                        DisplayAlert("Fout", "Er is iets misgegaan met het verwijderen. Probeer het nog eens.", "Oke");
                     }
                 }
             }

@@ -29,7 +29,7 @@ namespace ZuydLuister
 
             if (!logout)
             {
-                Navigation.PopToRootAsync();
+                await Navigation.PopToRootAsync();
             }
         }
 

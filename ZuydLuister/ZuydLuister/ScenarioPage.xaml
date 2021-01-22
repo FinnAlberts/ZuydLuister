@@ -8,7 +8,9 @@
             <ListView x:Name="answerListView" ItemSelected="answerListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding AnswerContent}" TextColor="{StaticResource TextColor}"/>
+                        <ViewCell>
+                            <Label Text="{Binding AnswerContent}" LineBreakMode="WordWrap"/>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

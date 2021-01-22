@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry x:Name="nameEntry" Placeholder="Voer een categorienaam in..."/>
+            <Editor x:Name="descriptionEditor" Placeholder="Voer een categoriebeschrijving in..."/>
             <Button x:Name="saveButton" Text="Sla categorie op" Clicked="saveButton_Clicked"/>
             <Button x:Name="deleteButton" Text="Verwijder categorie" Clicked="deleteButton_Clicked"/>
         </StackLayout>

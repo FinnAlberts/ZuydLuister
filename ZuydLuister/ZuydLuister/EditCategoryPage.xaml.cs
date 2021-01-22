@@ -29,11 +29,12 @@ namespace ZuydLuister
             isNew = false;
             selectedCategory = categoryInput;
             nameEntry.Text = selectedCategory.ScoreCategoryName;
+            descriptionEditor.Text = selectedCategory.ScoreCategoryDescription;
         }
 
         private void saveButton_Clicked(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(nameEntry.Text))
+            if (String.IsNullOrEmpty(nameEntry.Text) && String.IsNullOrEmpty(descriptionEditor.Text))
             {
                 DisplayAlert("Fout", "Niet alle velden zijn ingevuld.", "Oke");
             } else
@@ -48,13 +49,20 @@ namespace ZuydLuister
                     {
                         if (category.ScoreCategoryName == nameEntry.Text)
                         {
-                            found = true;
+                            if (isNew)
+                            {
+                                found = true;
+                            } 
+                            else if (selectedCategory.ScoreCategoryName != nameEntry.Text) 
+                            {
+                                found = true;
+                            }
                         }
-                    }
+                    }                       
 
                     if (!found && isNew)
                     {
-                        ScoreCategory category = new ScoreCategory() { ScoreCategoryName = nameEntry.Text };
+                        ScoreCategory category = new ScoreCategory() { ScoreCategoryName = nameEntry.Text, ScoreCategoryDescription = descriptionEditor.Text};
                         int rows = connection.Insert(category);
 
                         if (rows > 0)
@@ -70,6 +78,7 @@ namespace ZuydLuister
                     else if (!found && !isNew)
                     {
                         selectedCategory.ScoreCategoryName = nameEntry.Text;
+                        selectedCategory.ScoreCategoryDescription = descriptionEditor.Text;
                         int rows = connection.Update(selectedCategory);
 
                         if (rows > 0)

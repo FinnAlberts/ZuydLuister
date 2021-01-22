@@ -23,28 +23,27 @@ namespace ZuydLuister
         }
 
         protected override void OnAppearing()
-        {            
+        {
             base.OnAppearing();
             int maxScore = 0;
             int achievedScore = 0;
             int scorePercentage = 0;
             List<string> scoreList = new List<string>();
-            var myScores = new List<Score>();            
+            var myScores = new List<Score>();
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
             {
                 connection.CreateTable<Score>();
                 var scores = connection.Table<Score>().ToList();
-                myScores = (from score in scores where score.SavegameId == savegame.SavegameId select score).ToList();                
+                myScores = (from score in scores where score.SavegameId == savegame.SavegameId select score).ToList();
             }
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
             {
                 connection.CreateTable<ScoreCategory>();
                 var scoreCategories = connection.Table<ScoreCategory>().ToList();
-                
+
                 foreach (Score score in myScores)
                 {
-                    var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId 
-                                        select category.ScoreCategoryName).ToList();
+                    var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId select category.ScoreCategoryName).ToList();
                     if (categoryName.Count != 0)
                     {
                         achievedScore += score.AchievedScore;
@@ -61,7 +60,7 @@ namespace ZuydLuister
             {
                 contactLabel.Text = "Het lijkt erop dat het niet zo goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
             }
-            else if (scorePercentage <= 50) 
+            else if (scorePercentage <= 50)
             {
                 contactLabel.Text = "Het lijkt erop dat het minder goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
             }
@@ -104,7 +103,21 @@ namespace ZuydLuister
 
         private void scoreListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            if (scoreListView.SelectedItem != null)
+            {
+                var selectedCategory = scoreListView.SelectedItem as string;
+                string selectedCategoryName = selectedCategory.Substring(0, selectedCategory.IndexOf(":"));
+                using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+                {
+                    connection.CreateTable<ScoreCategory>();
+                    var scoreCategories = connection.Table<ScoreCategory>().ToList();
+                    var description = (from scoreCategory in scoreCategories
+                                       where scoreCategory.ScoreCategoryName == selectedCategoryName
+                                       select scoreCategory.ScoreCategoryDescription).ToList()[0];
+                    DisplayAlert("Beschrijving " + selectedCategoryName, description, "Oke");
+                }
+            }            
+            scoreListView.SelectedItem = null;
         }
     }
 }

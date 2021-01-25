@@ -5,9 +5,8 @@
              x:Class="ZuydLuister.ContactPage">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
-            <Entry x:Name="emailEntry" Placeholder="Vul je emailadres in..."/>
-            <Editor x:Name="emailEditor" Placeholder="Typ hier je bericht..." HeightRequest="250"/>
+            <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>            
+            <Editor x:Name="emailEditor" Placeholder="Typ hier je e-mailbericht..." HeightRequest="250"/>
             <Button x:Name="sendEmailButton" Text="Verzend bericht" Clicked="sendEmailButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

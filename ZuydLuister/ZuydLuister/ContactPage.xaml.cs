@@ -17,9 +17,10 @@ namespace ZuydLuister
             InitializeComponent();
         }
 
-        private void sendEmailButton_Clicked(object sender, EventArgs e)
+        private async void sendEmailButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MenuPage());
+            await Xamarin.Essentials.Email.ComposeAsync("Contactaanvraag luisterstudent", emailEditor.Text, "Luister@Zuyd.nl");
+            await Navigation.PushAsync(new MenuPage());
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

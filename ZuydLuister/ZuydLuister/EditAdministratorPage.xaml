@@ -4,10 +4,10 @@
              x:Class="ZuydLuister.EditAdministratorPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="emailEntry" Placeholder="Voer een email adres in..."/>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Hoofdbeheerder"/>
-                <CheckBox x:Name="masterAdminCheckBox"/>
+            <Entry x:Name="emailEntry" Placeholder="Voer een e-mailadres in..."/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <Label Text="Hoofdbeheerder" VerticalOptions="CenterAndExpand"/>
+                <CheckBox x:Name="masterAdminCheckBox" VerticalOptions="CenterAndExpand"/>
             </StackLayout>
             <Button x:Name="saveAdminButton" Text="Sla beheerder op" Clicked="saveAdminButton_Clicked"/>
             <Button x:Name="deleteAdminButton" Text="Verwijder beheerder" Clicked="deleteAdminButton_Clicked"/>

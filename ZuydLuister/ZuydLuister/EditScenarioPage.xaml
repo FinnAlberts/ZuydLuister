@@ -6,9 +6,9 @@
         <ScrollView>
             <StackLayout>
                 <Entry x:Name="nameEntry" Placeholder="Voer een scenario naam in..."/>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Startscenario"/>
-                    <CheckBox x:Name="startScenarioCheckBox"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label Text="Startscenario" VerticalOptions="CenterAndExpand"/>
+                    <CheckBox x:Name="startScenarioCheckBox" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
                 <Editor x:Name="textEditor" Placeholder="Voer een scenario in..."/>
                 <Entry x:Name="imageEntry" Placeholder="Voer een afbeelding url in..."/>

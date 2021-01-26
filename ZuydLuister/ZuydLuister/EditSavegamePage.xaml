@@ -4,9 +4,11 @@
              x:Class="ZuydLuister.EditSavegamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="savegameNameEntry" Text="{Binding SavegameName}"/>
-            <Label Text="Wachtwoord?"/>
-            <CheckBox x:Name="passwordCheckBox"/>
+            <Entry x:Name="savegameNameEntry" Placeholder="Naam..." Text="{Binding SavegameName}"/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <Label Text="Wachtwoord?" VerticalOptions="CenterAndExpand"/>
+                <CheckBox x:Name="passwordCheckBox" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
             <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
             <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
             <Button x:Name="saveEditSavegameButton" Text="Opslaan" Clicked="saveEditSavegameButton_Clicked"/>

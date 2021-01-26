@@ -22,6 +22,11 @@ namespace ZuydLuister
             NavigationPage.SetHasBackButton(this, false);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

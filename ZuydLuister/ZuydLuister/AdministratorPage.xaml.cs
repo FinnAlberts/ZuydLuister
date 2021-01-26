@@ -18,6 +18,12 @@ namespace ZuydLuister
             NavigationPage.SetHasBackButton(this, false);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
+
         private void adminScenarioButton_Clicked(object sender, EventArgs e)
         {
 

@@ -18,6 +18,11 @@ namespace ZuydLuister
             NavigationPage.SetHasBackButton(this, false);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
         private void adminButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AdministratorPage());

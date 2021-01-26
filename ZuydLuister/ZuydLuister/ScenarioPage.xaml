@@ -12,7 +12,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding AnswerContent}" LineBreakMode="WordWrap"/>
+                            <Label Text="{Binding AnswerContent}" LineBreakMode="WordWrap" VerticalOptions="CenterAndExpand"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

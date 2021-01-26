@@ -31,56 +31,63 @@ namespace ZuydLuister
 
         private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
         {
-            bool foundName = false;
-            using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
+            if (!String.IsNullOrEmpty(savegameNameEntry.Text))
             {
-                connection.CreateTable<Savegame>();
-                var savegames = connection.Table<Savegame>().ToList();
-                foreach (Savegame savegame in savegames)
-                {
-                    if (savegameNameEntry.Text == savegame.SavegameName && selectedSavegame.SavegameName != savegameNameEntry.Text)
-                    {
-                        foundName = true;
-                        DisplayAlert("Fout", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
-                        break;
-                    }
-                }
-
-                if (!foundName)
+                bool foundName = false;
+                using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
                     connection.CreateTable<Savegame>();
-
-                    selectedSavegame.SavegameName = savegameNameEntry.Text;
-
-                    int rows = 0;
-                    if (passwordCheckBox.IsChecked)
+                    var savegames = connection.Table<Savegame>().ToList();
+                    foreach (Savegame savegame in savegames)
                     {
-                        if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text)
+                        if (savegameNameEntry.Text == savegame.SavegameName && selectedSavegame.SavegameName != savegameNameEntry.Text)
                         {
-                            selectedSavegame.SavegamePassword = savegamePasswordEntry.Text;
-                            rows = connection.Update(selectedSavegame);
+                            foundName = true;
+                            DisplayAlert("Fout", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
+                            break;
+                        }
+                    }
+
+                    if (!foundName)
+                    {
+                        connection.CreateTable<Savegame>();
+
+                        selectedSavegame.SavegameName = savegameNameEntry.Text;
+
+                        int rows = 0;
+                        if (passwordCheckBox.IsChecked)
+                        {
+                            if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text)
+                            {
+                                selectedSavegame.SavegamePassword = savegamePasswordEntry.Text;
+                                rows = connection.Update(selectedSavegame);
+                            }
+                            else
+                            {
+                                DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
+                            }
                         }
                         else
                         {
-                            DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
+                            selectedSavegame.SavegamePassword = null;
+                            rows = connection.Update(selectedSavegame);
+                        }
+
+                        if (rows > 0)
+                        {
+                            DisplayAlert("Succes", "Je hebt succesvol een savegame gewijzigd.", "Oke");
+                            Navigation.PopAsync();
+                        }
+                        else
+                        {
+                            DisplayAlert("Fout", "Er is iets misgegaan. Probeer het nog eens.", "Oke");
                         }
                     }
-                    else
-                    {
-                        selectedSavegame.SavegamePassword = null;
-                        rows = connection.Update(selectedSavegame);
-                    }
-
-                    if (rows > 0)
-                    {
-                        DisplayAlert("Succes", "Je hebt succesvol een savegame gewijzigd.", "Oke");
-                        Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        DisplayAlert("Fout", "Er is iets misgegaan. Probeer het nog eens", "Oke");
-                    }
                 }
+            } 
+            else
+            {
+                DisplayAlert("Fout", "Er is geen naam ingevuld. Vul een naam in om op te slaan.", "Oke");
             }
         }
 

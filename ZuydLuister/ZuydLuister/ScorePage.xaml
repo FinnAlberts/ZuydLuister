@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿- Fixed<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.ScorePage">
@@ -12,10 +12,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="contactLabel" HorizontalTextAlignment="Center" FontSize="Body"/>
+            <Label x:Name="contactLabel" HorizontalTextAlignment="Center"/>
             <Button x:Name="contactButton" Text="Contact opnemen" Clicked="contactButton_Clicked"/>
             <Label x:Name="workshopsLabel" Text="Zuyd L U I S T E R biedt ook verschillende workshops. Bekijk hieronder het aanbod"
-                   HorizontalTextAlignment="Center" FontSize="Body"/>
+                   HorizontalTextAlignment="Center"/>
             <Button x:Name="workshopsButton" Text="Workshops" Clicked="workshopsButton_Clicked"/>
             <Button x:Name="backToMenuButton" Text="Terug naar menu" Clicked="backToMenuButton_Clicked"/>
         </StackLayout>

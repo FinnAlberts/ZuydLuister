@@ -34,7 +34,7 @@ namespace ZuydLuister
 
         private void saveButton_Clicked(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(nameEntry.Text) && String.IsNullOrEmpty(descriptionEditor.Text))
+            if (String.IsNullOrEmpty(nameEntry.Text) || String.IsNullOrEmpty(descriptionEditor.Text))
             {
                 DisplayAlert("Fout", "Niet alle velden zijn ingevuld.", "Oke");
             } else

@@ -60,22 +60,29 @@ namespace ZuydLuister
             scoreListView.ItemsSource = scoreList;
             averageScoreLabel.Text = "Je totale score is: " + achievedScore + "/" + maxScore;
 
-            scorePercentage = achievedScore * 100 / maxScore;
-            if (scorePercentage <= 25)
+            if (maxScore > 0)
             {
-                contactLabel.Text = "Het lijkt erop dat het niet zo goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
-            }
-            else if (scorePercentage <= 50)
-            {
-                contactLabel.Text = "Het lijkt erop dat het minder goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
-            }
-            else if (scorePercentage <= 75)
-            {
-                contactLabel.Text = "Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                scorePercentage = achievedScore * 100 / maxScore;
+                if (scorePercentage <= 25)
+                {
+                    contactLabel.Text = "Het lijkt erop dat het niet zo goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
+                }
+                else if (scorePercentage <= 50)
+                {
+                    contactLabel.Text = "Het lijkt erop dat het minder goed met je gaat. Wil je met iemand hierover praten? Klik dan hieronder.";
+                }
+                else if (scorePercentage <= 75)
+                {
+                    contactLabel.Text = "Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                }
+                else
+                {
+                    contactLabel.Text = "Het lijkt erop dat het uitstekend met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                }
             }
             else
             {
-                contactLabel.Text = "Het lijkt erop dat het uitstekend met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                contactLabel.Text = "Het lijkt erop dat er geen score is. Wil je alsnog met iemand praten? Klik dan hieronder.";
             }
         }
 

@@ -3,19 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.NewSavegamePage">
 
-    <StackLayout>
-        <Entry x:Name="savegameNameEntry" Placeholder="Naam..."/>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-            <Label Text="Wachtwoord?" VerticalOptions="CenterAndExpand"/>
-            <CheckBox x:Name="passwordCheckBox" VerticalOptions="CenterAndExpand"/>
+    <ScrollView>
+        <StackLayout>
+            <Entry x:Name="savegameNameEntry" Placeholder="Naam..."/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <Label Text="Wachtwoord?" VerticalOptions="CenterAndExpand"/>
+                <CheckBox x:Name="passwordCheckBox" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+            <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
+            <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
+            <Label Text="Instructies" FontSize="Title"/>
+            <Label Text="Zodra je het spel start krijg je een aantal scenario's voorgelegd waar je een keuze moet maken. Als je aan het einde bent gekomen kun je je scores inzien. Je krijgt een totaalscore en de score voor iedere individuele categorie, zoals bijvoorbeeld stressbestendigheid, te zien. Hierdoor kan je zien in welke categorie je goed en in welke categorie slecht hebt gescoord. Als je op een categorie klikt krijg je meer informatie over deze categorie."/>
+            <Label Text="Antwoord eerst zoals je zelf zou reageren. Hierdoor krijg je een goede indiacatie hoe je er mentaal voorstaat. Daarna mag je proberen de verschillende eindes te krijgen."/>
+            <Button x:Name="startButton" Text="Start" Clicked="startButton_Clicked"/>
         </StackLayout>
-        <Entry x:Name="savegamePasswordEntry" Placeholder="Wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
-        <Entry x:Name="confirmSavegamePasswordEntry" Placeholder="Bevestig wachtwoord..." IsPassword="True" IsVisible="{Binding Source={x:Reference passwordCheckBox}, Path=IsChecked}"/>
-        <Label Text="Instructies" FontSize="Title"/>
-        <Label Text="Zodra je het spel start krijg je een aantal scenario's voorgelegd waar je een keuze moet maken. Als je aan het einde bent gekomen kun je je scores inzien. Je krijgt een totaalscore en de score voor iedere individuele categorie, zoals bijvoorbeeld stressbestendigheid, te zien. Hierdoor kan je zien in welke categorie je goed en in welke categorie slecht hebt gescoord. Als je op een categorie klikt krijg je meer informatie over deze categorie."/>
-        <Label Text="Antwoord eerst zoals je zelf zou reageren. Hierdoor krijg je een goede indiacatie hoe je er mentaal voorstaat. Daarna mag je proberen de verschillende eindes te krijgen."/>
-        <Button x:Name="startButton" Text="Start" Clicked="startButton_Clicked"/>
-    </StackLayout>
+    </ScrollView>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>

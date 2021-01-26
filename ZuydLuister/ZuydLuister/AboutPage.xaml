@@ -4,11 +4,12 @@
              xmlns:markupExtensions="clr-namespace:ZuydLuister.MarkupExtensions"
              x:Class="ZuydLuister.AboutPage">
 
-    <StackLayout>
-        <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
-        <Label>
-            <Label.Text>
-                Zuyd L U I S T E R biedt alle studenten die binnen Zuyd Hogeschool studeren de mogelijkheid om vrijblijvend een gesprek aan te gaan in een veilige omgeving.
+    <ScrollView>
+        <StackLayout>
+            <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
+            <Label>
+                <Label.Text>
+                    Zuyd L U I S T E R biedt alle studenten die binnen Zuyd Hogeschool studeren de mogelijkheid om vrijblijvend een gesprek aan te gaan in een veilige omgeving.
 Deze gesprekken worden gevoerd met een luisterstudent.
 
 Soms wil je even je verhaal kwijt, op een laagdrempelige manier praten over een probleem of zorg. Ook als je niet goed weet waar de oorzaak ligt of waar je moet beginnen. Je hart luchten is vaak al genoeg.
@@ -17,12 +18,13 @@ Een grote hulpvraag is niet nodig, Zuyd L U I S T E R is er voor iedereen.
 De gesprekken zijn laagdrempelig, je kunt gemakkelijk een aanvraag doen. Bovendien ga je in gesprek met een leeftijdsgenoot.
 Een luisterstudent weet hoe het schoolsysteem in elkaar zit en kan zich goed inleven in de vragen of problemen die er bij jongeren spelen. Sommige studenten gaan niet graag naar hun ouders of klasgenoten om hun verhaal te doen en de stap naar een psycholoog is soms te groot.
 Een goed gesprek met een leeftijdsgenoot, iemand die wellicht in hetzelfde schuitje heeft gezeten, kan dan juist erg prettig zijn.
-            </Label.Text>
-        </Label> 
-        <Button x:Name="contactButton" Text="Neem contact op" Clicked="contactButton_Clicked"/>
-        <Button x:Name="workshopButton" Text="Workshops" Clicked="workshopButton_Clicked"/>
-        <Button x:Name="moodleMOOIButton" Text="Moodle MOOI" Clicked="moodleMOOIButton_Clicked"/>
-    </StackLayout>
+                </Label.Text>
+            </Label>
+            <Button x:Name="contactButton" Text="Neem contact op" Clicked="contactButton_Clicked"/>
+            <Button x:Name="workshopButton" Text="Workshops" Clicked="workshopButton_Clicked"/>
+            <Button x:Name="moodleMOOIButton" Text="Moodle MOOI" Clicked="moodleMOOIButton_Clicked"/>
+        </StackLayout>
+    </ScrollView>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="menuToolbarItem" Text="Menu" Clicked="menuToolbarItem_Clicked"/>        

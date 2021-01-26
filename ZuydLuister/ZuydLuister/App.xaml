@@ -8,9 +8,11 @@
             <Color x:Key="TextColor">#deedf4</Color>
             <Color x:Key="ButtonColor">#deedf4</Color>
             <Color x:Key="DarkColor">#000000</Color>
+            <Color x:Key="AccentColor">#E51C2E</Color>
 
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="Padding" Value="5"/>
             </Style>
             <Style TargetType="NavigationPage"  ApplyToDerivedTypes="True">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource BackgroundColor}"/>
@@ -23,11 +25,24 @@
             </Style>
             <Style TargetType="Label" ApplyToDerivedTypes="True">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+                <Setter Property="FontSize" Value="18"/>
             </Style>
             <Style TargetType="Button" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonColor}"/>
                 <Setter Property="BorderColor" Value="{StaticResource DarkColor}"/>
                 <Setter Property="BorderWidth" Value="2"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+            </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Color" Value="{StaticResource AccentColor}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

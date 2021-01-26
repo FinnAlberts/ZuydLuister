@@ -31,6 +31,9 @@ namespace ZuydLuister.Droid
             string gameDBName = "GameDatabase.sqlite";
             string gamefolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string gamefullPath = Path.Combine(gamefolderPath, gameDBName);
+
+            Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 178, 117, 32));
+
             LoadApplication(new App(userfullPath, gamefullPath));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

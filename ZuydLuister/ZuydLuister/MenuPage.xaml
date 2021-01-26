@@ -6,7 +6,7 @@
 
     <StackLayout>
         <Image Source="{markupExtensions:EmbeddedImage ResourceId=ZuydLuister.Assets.Images.zuydluister.png}"/>
-        <Label Text="Welkom!"/>
+        <Label Text="Welkom!" FontSize="Title" HorizontalOptions="Center"/>
         <Button x:Name="aboutButton" Text="Wat is Zuyd L U I S T E R?" Clicked="aboutButton_Clicked"/>
         <Button x:Name="playButton" Text="Speel" Clicked="playButton_Clicked"/>
         <Button x:Name="logoutButton" Text="Uitloggen" Clicked="logoutButton_Clicked"/>

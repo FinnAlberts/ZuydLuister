@@ -12,6 +12,8 @@ namespace ZuydLuister
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        public static int permissions;
+        
         public LoginPage()
         {
             InitializeComponent();

@@ -73,11 +73,11 @@ namespace ZuydLuister
                 }
                 else if (scorePercentage <= 75)
                 {
-                    contactLabel.Text = "Het lijkt erop dat het best goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                    contactLabel.Text = "Het lijkt erop dat het goed met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
                 }
                 else
                 {
-                    contactLabel.Text = "Het lijkt erop dat het uitstekend met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder.";
+                    contactLabel.Text = "Het lijkt erop dat het uitstekend met je gaat. Wil je alsnog met iemand praten? Klik dan hieronder. Klik ook hieronder als je zelf geïntreseerd bent om luisterstudent te worden en zo anderen te helpen.";
                 }
             }
             else

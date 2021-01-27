@@ -23,6 +23,19 @@ namespace ZuydLuister
             return true;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (LoginPage.permissions > 1)
+            {
+                administratorTab.IsVisible = true;
+            } 
+            else
+            {
+                administratorTab.IsVisible = false;
+            }
+        }
 
         private void adminScenarioButton_Clicked(object sender, EventArgs e)
         {

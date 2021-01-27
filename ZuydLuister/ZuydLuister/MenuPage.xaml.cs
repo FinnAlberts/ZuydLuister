@@ -23,6 +23,20 @@ namespace ZuydLuister
             return true;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (LoginPage.permissions > 0)
+            {
+                adminButton.IsVisible = true;
+            }
+            else
+            {
+                adminButton.IsVisible = false;
+            }
+        }
+
         private void adminButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AdministratorPage());

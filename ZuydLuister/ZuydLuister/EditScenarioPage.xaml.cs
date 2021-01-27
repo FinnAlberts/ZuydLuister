@@ -370,33 +370,38 @@ namespace ZuydLuister
             }
         }
 
-        private void deleteButton_Clicked(object sender, EventArgs e)
+        private async void deleteButton_Clicked(object sender, EventArgs e)
         {
-            using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+            var delete = await DisplayAlert("Verwijderen", "Weet je zeker dat je dit scenario wilt verwijderen?", "Nee", "Ja");
+
+            if (!delete)
             {
-                connection.CreateTable<Scenario>();
-                connection.CreateTable<Answer>();
-
-                int rows = connection.Delete(scenario);
-
-                var answers = connection.Table<Answer>().ToList();
-                var scenarioAnswers = (from answer in answers where answer.ScenarioId == scenario.ScenarioId select answer).ToList();
-                foreach (Answer answer in scenarioAnswers)
+                using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
-                    rows += connection.Delete(answer);
-                }
+                    connection.CreateTable<Scenario>();
+                    connection.CreateTable<Answer>();
 
-                // Check for errors while updating
-                if (rows != 1 + scenarioAnswers.Count)
-                {
-                    DisplayAlert("Fout", "Er is iets misgegaan tijdens het verwijderen van het scenario. Probeer het opnieuw.", "Oke");
+                    int rows = connection.Delete(scenario);
+
+                    var answers = connection.Table<Answer>().ToList();
+                    var scenarioAnswers = (from answer in answers where answer.ScenarioId == scenario.ScenarioId select answer).ToList();
+                    foreach (Answer answer in scenarioAnswers)
+                    {
+                        rows += connection.Delete(answer);
+                    }
+
+                    // Check for errors while updating
+                    if (rows != 1 + scenarioAnswers.Count)
+                    {
+                        await DisplayAlert("Fout", "Er is iets misgegaan tijdens het verwijderen van het scenario. Probeer het opnieuw.", "Oke");
+                    }
+                    else // No errors
+                    {
+                        await DisplayAlert("Succes", "Het scenario is succesvol verwijderd.", "Oke");
+                        await Navigation.PopAsync();
+                    }
                 }
-                else // No errors
-                {
-                    DisplayAlert("Succes", "Het scenario is succesvol verwijderd.", "Oke");
-                    Navigation.PopAsync();
-                }
-            }
+            }            
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

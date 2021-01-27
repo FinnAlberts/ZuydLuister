@@ -7,9 +7,7 @@
             <ListView x:Name="adminListView" ItemTapped="adminListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding}" Style="{StaticResource}"/>
-                        </ViewCell>
+                        <TextCell Text="{Binding AdminEmail}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

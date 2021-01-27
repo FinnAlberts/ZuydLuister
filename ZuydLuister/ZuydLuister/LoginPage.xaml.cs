@@ -35,8 +35,20 @@ namespace ZuydLuister
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
                     connection.CreateTable<Administrator>();
-                    var administrators = connection.Table<Administrator>().ToList();
-                    administrators = (from administrator in administrators where usernameEntry.Text == administrator.AdminEmail select administrator).ToList();
+                    var all_administrators = connection.Table<Administrator>().ToList();
+                    var zuydLuisterAdmins = (from administrator in all_administrators where administrator.AdminEmail == "luister@zuyd.nl" select administrator).ToList();
+
+                    if (zuydLuisterAdmins.Count == 0)
+                    {
+                        Administrator zuydLuisterAdministrator = new Administrator { AdminEmail = "luister@zuyd.nl", IsMasterAdmin = true };
+                        int rows = connection.Insert(zuydLuisterAdministrator);
+                        if (rows == 0)
+                        {
+                            DisplayAlert("Fout", "Luister@zuyd.nl kon niet worden geregistreerd als beheerder.", "Oke");
+                        }
+                    }
+
+                    var administrators = (from administrator in all_administrators where usernameEntry.Text.ToLower() == administrator.AdminEmail select administrator).ToList();
 
                     if (administrators.Count > 0)
                     {
@@ -52,11 +64,6 @@ namespace ZuydLuister
                     else
                     {
                         permissions = 0;
-                    }
-
-                    if (usernameEntry.Text.ToLower() == "luister@zuyd.nl")
-                    {
-                        permissions = 2;
                     }
                 }
                 

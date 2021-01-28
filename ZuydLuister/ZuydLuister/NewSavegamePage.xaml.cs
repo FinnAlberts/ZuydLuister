@@ -38,8 +38,9 @@ namespace ZuydLuister
             
             if (startScenarioId != 0) // A StartScenario exists, continue
             {
-                // Check if name is unique
+                // Check if name is unique and is not null or empty
                 bool foundName = false;
+                var savegameNameEmpty = String.IsNullOrEmpty(savegameNameEntry.Text);
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
                     // Check if savegame already exists
@@ -55,8 +56,8 @@ namespace ZuydLuister
                         }
                     }
 
-                    // Name is unique
-                    if (!foundName)
+                    // Name is unique and entry not null or empty
+                    if (!foundName && !savegameNameEmpty)
                     {
                         Savegame savegame = new Savegame() { SavegameName = savegameNameEntry.Text, ScenarioId = startScenarioId };
                         bool passwordsMatch = true;
@@ -92,6 +93,10 @@ namespace ZuydLuister
                         {
                             DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
                         }
+                    }
+                    else if (!foundName && savegameNameEmpty)
+                    {
+                        DisplayAlert("Fout", "Alle velden moeten worden ingevuld.", "Oke");
                     }
                 }
             }

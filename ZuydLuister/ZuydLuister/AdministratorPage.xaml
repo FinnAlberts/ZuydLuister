@@ -2,7 +2,8 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ZuydLuister.AdministratorPage"
-             xmlns:local="clr-namespace:ZuydLuister">
+             xmlns:local="clr-namespace:ZuydLuister"
+            x:Name="administratorPage">
 
     <local:ScenariosOverviewPage Title="Scenario's"/>
     <local:CategoryOverviewPage Title="Categorieën"/>

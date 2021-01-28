@@ -27,14 +27,10 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
-            if (LoginPage.permissions > 1)
+            if (LoginPage.permissions < 2)
             {
-                administratorTab.IsVisible = true;
-            } 
-            else
-            {
-                administratorTab.IsVisible = false;
-            }
+                administratorPage.Children.Remove(administratorTab);
+            }            
         }
 
         private void adminScenarioButton_Clicked(object sender, EventArgs e)

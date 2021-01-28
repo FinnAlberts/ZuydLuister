@@ -7,7 +7,7 @@
             <ListView x:Name="adminListView" ItemTapped="adminListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding AdminEmail}"/>
+                        <TextCell Text="{Binding AdminEmail}" TextColor="{StaticResource TextColor}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

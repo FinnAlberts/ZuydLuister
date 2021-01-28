@@ -94,6 +94,10 @@ namespace ZuydLuister
                             DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
                         }
                     }
+                    else if (!foundName && savegameNameEmpty)
+                    {
+                        DisplayAlert("Fout", "Alle velden moeten worden ingevuld.", "Oke");
+                    }
                 }
             }
         }

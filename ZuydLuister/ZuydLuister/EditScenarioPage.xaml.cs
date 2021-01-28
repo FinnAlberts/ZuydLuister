@@ -372,9 +372,10 @@ namespace ZuydLuister
 
         private async void deleteButton_Clicked(object sender, EventArgs e)
         {
+            // Ask for confirmation
             var delete = await DisplayAlert("Verwijderen", "Weet je zeker dat je dit scenario wilt verwijderen?", "Nee", "Ja");
 
-            if (!delete)
+            if (!delete) // Deletion confirmed
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
@@ -390,12 +391,12 @@ namespace ZuydLuister
                         rows += connection.Delete(answer);
                     }
 
-                    // Check for errors while updating
+                    // Error reporting
                     if (rows != 1 + scenarioAnswers.Count)
                     {
                         await DisplayAlert("Fout", "Er is iets misgegaan tijdens het verwijderen van het scenario. Probeer het opnieuw.", "Oke");
                     }
-                    else // No errors
+                    else 
                     {
                         await DisplayAlert("Succes", "Het scenario is succesvol verwijderd.", "Oke");
                         await Navigation.PopAsync();

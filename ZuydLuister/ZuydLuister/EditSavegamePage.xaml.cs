@@ -20,6 +20,8 @@ namespace ZuydLuister
             InitializeComponent();
 
             selectedSavegame = savegameInput;
+
+            // Load existing data 
             savegameNameEntry.Text = savegameInput.SavegameName;
             if (!String.IsNullOrEmpty(savegameInput.SavegamePassword))
             {
@@ -31,16 +33,18 @@ namespace ZuydLuister
 
         private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(savegameNameEntry.Text))
+            // Check if everything is filled in
+            if (!String.IsNullOrEmpty(savegameNameEntry.Text)) // Everything is filled in
             {
                 bool foundName = false;
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
+                    // Check if savegamename already exisits
                     connection.CreateTable<Savegame>();
                     var savegames = connection.Table<Savegame>().ToList();
                     foreach (Savegame savegame in savegames)
                     {
-                        if (savegameNameEntry.Text == savegame.SavegameName && selectedSavegame.SavegameName != savegameNameEntry.Text)
+                        if (savegameNameEntry.Text == savegame.SavegameName && selectedSavegame.SavegameName != savegameNameEntry.Text) // Name exists
                         {
                             foundName = true;
                             DisplayAlert("Fout", "Deze naam wordt al gebruikt. Probeer een andere naam.", "Oke");
@@ -48,8 +52,9 @@ namespace ZuydLuister
                         }
                     }
 
-                    if (!foundName)
+                    if (!foundName) // Name doesn't yet exist
                     {
+                        // Update the savegame
                         connection.CreateTable<Savegame>();
 
                         selectedSavegame.SavegameName = savegameNameEntry.Text;
@@ -57,7 +62,7 @@ namespace ZuydLuister
                         int rows = 0;
                         if (passwordCheckBox.IsChecked)
                         {
-                            if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text)
+                            if (savegamePasswordEntry.Text == confirmSavegamePasswordEntry.Text) // Check if passwords match
                             {
                                 selectedSavegame.SavegamePassword = savegamePasswordEntry.Text;
                                 rows = connection.Update(selectedSavegame);
@@ -73,6 +78,7 @@ namespace ZuydLuister
                             rows = connection.Update(selectedSavegame);
                         }
 
+                        // Error reporting
                         if (rows > 0)
                         {
                             DisplayAlert("Succes", "Je hebt succesvol een savegame gewijzigd.", "Oke");
@@ -93,11 +99,13 @@ namespace ZuydLuister
 
         private async void deleteSavegameButton_Clicked(object sender, EventArgs e)
         {
+            // Ask for confirmation
             var answer = await DisplayAlert("Verwijderen", "Weet je zeker dat je deze savegame wilt verwijderen?", "Nee", "Ja");
-            if (!answer)
+            if (!answer) // Deletion confirmed
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
+                    // Delete all scores which are linked to the savegame
                     connection.CreateTable<Savegame>();
                     connection.CreateTable<Score>();
                     var scores = connection.Table<Score>().ToList();
@@ -107,8 +115,10 @@ namespace ZuydLuister
                         connection.Delete(score);
                     }
 
+                    // Delete the savegame
                     int rows = connection.Delete(selectedSavegame);
 
+                    // Error reporting
                     if (rows > 0)
                     {
                         await DisplayAlert("Succes", "Je hebt deze savegame succesvol verwijderd.", "Oke");

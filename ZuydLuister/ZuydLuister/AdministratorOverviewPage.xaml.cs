@@ -23,6 +23,7 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Load administrators into listview
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
             {
                 connection.CreateTable<Administrator>();
@@ -34,10 +35,13 @@ namespace ZuydLuister
 
         private void adminListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            // Check if an item has been selected
             if (adminListView.SelectedItem != null)
             {
+                // Get the selected admin
                 Administrator selectedAdmin = adminListView.SelectedItem as Administrator;
 
+                // Check if selected admin is luister@zuyd.nl, this admin cannot be edited
                 if (selectedAdmin.AdminEmail == "luister@zuyd.nl")
                 {
                     DisplayAlert("Fout", "Luister@zuyd.nl kan niet worden bewerkt.", "Oke");
@@ -45,6 +49,7 @@ namespace ZuydLuister
                 }
                 else
                 {
+                    // Open for editing
                     Navigation.PushAsync(new EditAdministratorPage(selectedAdmin));
                 }
             }

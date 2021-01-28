@@ -30,22 +30,29 @@ namespace ZuydLuister
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            // Initialize variables
             int maxScore = 0;
             int achievedScore = 0;
             int scorePercentage = 0;
             List<string> scoreList = new List<string>();
             var myScores = new List<Score>();
+
+            // Get achieved and max scores and save in myScores
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
             {
                 connection.CreateTable<Score>();
                 var scores = connection.Table<Score>().ToList();
                 myScores = (from score in scores where score.SavegameId == savegame.SavegameId select score).ToList();
             }
+
+            // Create a nice text for each score
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
             {
                 connection.CreateTable<ScoreCategory>();
                 var scoreCategories = connection.Table<ScoreCategory>().ToList();
 
+                // For each score in myScores, get the corresponding category name and create a string. Add this string to scoreList variable.
                 foreach (Score score in myScores)
                 {
                     var categoryName = (from category in scoreCategories where category.ScoreCategoryId == score.ScoreCategoryId select category.ScoreCategoryName).ToList();
@@ -57,9 +64,14 @@ namespace ZuydLuister
                     }
                 }
             }
+
+            // Load scoreList into ListView
             scoreListView.ItemsSource = scoreList;
+
+            // Show the total achieved and max score
             averageScoreLabel.Text = "Je totale score is: " + achievedScore + "/" + maxScore;
 
+            // Calculate percentage and give advice
             if (maxScore > 0)
             {
                 scorePercentage = achievedScore * 100 / maxScore;
@@ -115,10 +127,16 @@ namespace ZuydLuister
 
         private void scoreListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            // Check if item is not null
             if (scoreListView.SelectedItem != null)
             {
+                // Get the scorecategory string
                 var selectedCategory = scoreListView.SelectedItem as string;
+
+                // Shorten the string to only the category name
                 string selectedCategoryName = selectedCategory.Substring(0, selectedCategory.IndexOf(":"));
+                
+                // Show a popup with the description of the category
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
                     connection.CreateTable<ScoreCategory>();

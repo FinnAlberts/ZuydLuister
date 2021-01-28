@@ -28,12 +28,15 @@ namespace ZuydLuister
             InitializeComponent();
             isNew = false;
             selectedCategory = categoryInput;
+
+            // Load existing data
             nameEntry.Text = selectedCategory.ScoreCategoryName;
             descriptionEditor.Text = selectedCategory.ScoreCategoryDescription;
         }
 
         private void saveButton_Clicked(object sender, EventArgs e)
         {
+            // Check if everything is filled in
             if (String.IsNullOrEmpty(nameEntry.Text) || String.IsNullOrEmpty(descriptionEditor.Text))
             {
                 DisplayAlert("Fout", "Niet alle velden zijn ingevuld.", "Oke");
@@ -43,8 +46,9 @@ namespace ZuydLuister
                 {
                     connection.CreateTable<ScoreCategory>();
                     var categories = connection.Table<ScoreCategory>().ToList();
+                    
+                    // Check if category already exists
                     bool found = false;
-
                     foreach (var category in categories)
                     {
                         if (category.ScoreCategoryName == nameEntry.Text)
@@ -60,7 +64,7 @@ namespace ZuydLuister
                         }
                     }                       
 
-                    if (!found && isNew)
+                    if (!found && isNew) // Register a new category
                     {
                         ScoreCategory category = new ScoreCategory() { ScoreCategoryName = nameEntry.Text, ScoreCategoryDescription = descriptionEditor.Text};
                         int rows = connection.Insert(category);
@@ -75,7 +79,7 @@ namespace ZuydLuister
                             DisplayAlert("Fout", "Er is iets mis gegaan. Probeer het nog eens.", "Oke");
                         }
                     }
-                    else if (!found && !isNew)
+                    else if (!found && !isNew) // Update a category
                     {
                         selectedCategory.ScoreCategoryName = nameEntry.Text;
                         selectedCategory.ScoreCategoryDescription = descriptionEditor.Text;
@@ -87,7 +91,7 @@ namespace ZuydLuister
                             Navigation.PopAsync();
                         }
                     }
-                    else if (found)
+                    else if (found) // Category already exists
                     {
                         DisplayAlert("Fout", "De ingevulde categorie bestaat al. Probeer een andere naam.", "Oke");
                     }
@@ -97,14 +101,17 @@ namespace ZuydLuister
 
         private async void deleteButton_Clicked(object sender, EventArgs e)
         {
+            // Ask for confirmation
             var answer = await DisplayAlert("Verwijderen", "Weet je zeker dat je deze categorie wilt verwijderen?", "Nee", "Ja");
-            if (!answer)
+            if (!answer) // Deletion confirmed
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
+                    // Delete category
                     connection.CreateTable<ScoreCategory>();
                     int rows = connection.Delete(selectedCategory);
 
+                    // Error reporting
                     if (rows > 0)
                     {
                         await DisplayAlert("Succes", "Je hebt deze categorie succesvol verwijderd.", "Oke");

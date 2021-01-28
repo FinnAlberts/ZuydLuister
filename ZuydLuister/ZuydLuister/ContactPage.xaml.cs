@@ -19,6 +19,7 @@ namespace ZuydLuister
 
         private async void sendEmailButton_Clicked(object sender, EventArgs e)
         {
+            // Create new e-mail
             await Xamarin.Essentials.Email.ComposeAsync("Contact via app", emailEditor.Text, "luister@zuyd.nl");
             await Navigation.PushAsync(new MenuPage());
         }

@@ -30,6 +30,7 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Load savegames into ListView
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
             {
                 connection.CreateTable<Savegame>();
@@ -45,30 +46,35 @@ namespace ZuydLuister
 
         private async void savegameListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            // Check if an item is selected
             if (savegameListView.SelectedItem != null)
             {
+                // Get selected savegame
                 var selectedSavegame = savegameListView.SelectedItem as Savegame;
                 currentSavegame = selectedSavegame;
-                if (String.IsNullOrEmpty(selectedSavegame.SavegamePassword))
+
+                // Check for password
+                if (String.IsNullOrEmpty(selectedSavegame.SavegamePassword)) // No password
                 {
                     await Navigation.PushAsync(new ScenarioPage(currentSavegame));
                 }
-                else
+                else // A password has been set
                 {
+                    // Ask for password
                     string password = await DisplayPromptAsync("Wachtwoord", "Vul hier je wachtwoord in:", "Oke", "Annuleren");
 
-                    if (!String.IsNullOrEmpty(password))
+                    if (!String.IsNullOrEmpty(password)) // Password has been entered
                     {
-                        if (password == selectedSavegame.SavegamePassword)
+                        if (password == selectedSavegame.SavegamePassword) // Password is correct
                         {
                             await Navigation.PushAsync(new ScenarioPage(currentSavegame));
                         }
-                        else
+                        else // Password is incorrect
                         {
                             await DisplayAlert("Fout", "Je hebt een verkeerd wachtwoord ingevoerd. Probeer het nog eens.", "Oke");
                         }
                     }
-                    else
+                    else // No password has been entered
                     {
                         await DisplayAlert("Fout", "Vul je wachtwoord in.", "Oke");
                     }

@@ -197,27 +197,31 @@ namespace ZuydLuister
             } 
             else
             {
-                // Everything is filled in, continue
-
-                // Read ScoreCategory from Picker
-                ScoreCategory scoreCategory = scoreCategoryPicker.SelectedItem as ScoreCategory;
-
-                if (isNew) // Scenario is a new scenario
+                // Check if name already exists
+                using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
-                    using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
+                    connection.CreateTable<Scenario>();
+                    var scenarios = connection.Table<Scenario>().ToList();
+                    var amountOfScenarios = (from scenario in scenarios where scenario.ScenarioName == nameEntry.Text select scenario).ToList();
+
+                    if (!isNew)
                     {
-                        connection.CreateTable<Scenario>();
-                        connection.CreateTable<Answer>();
+                        amountOfScenarios = (from scenario in amountOfScenarios where scenario.ScenarioName != this.scenario.ScenarioName select scenario).ToList();
+                    }
 
-                        // Check if name already exists
-                        var scenarios = connection.Table<Scenario>().ToList();
-                        int amountOfScenarios = (from scenario in scenarios where scenario.ScenarioName == nameEntry.Text select scenario).ToList().Count;
+                    if (amountOfScenarios.Count > 0) // Name already exists
+                    {
+                        DisplayAlert("Fout", "De opgegeven scenarionaam bestaat al. Kies een andere naam.", "Oke");
+                    }
+                    else // Name does not yet exist
+                    {
+                        // Read ScoreCategory from Picker
+                        ScoreCategory scoreCategory = scoreCategoryPicker.SelectedItem as ScoreCategory;
 
-                        if (amountOfScenarios > 0) // Name already exists
+                        if (isNew) // Scenario is a new scenario
                         {
-                            DisplayAlert("Fout", "De opgegeven scenarionaam bestaat al. Kies een andere naam.", "Oke");
-                        } else // Name does not yet exist
-                        {
+                            connection.CreateTable<Answer>();
+
                             // Check if new scenario is going to be the startScenario. If so, set all scenarios in the database to IsStartScenario is false
                             if (startScenarioCheckBox.IsChecked)
                             {
@@ -228,7 +232,7 @@ namespace ZuydLuister
                                     connection.Update(startScenario);
                                 }
                             }
-                            
+
                             // Create a new scenario and insert it into the database
                             scenario = new Scenario { ScenarioContent = textEditor.Text, ScenarioImage = imageEntry.Text, ScenarioName = nameEntry.Text, ScoreCategoryId = scoreCategory.ScoreCategoryId, IsStartScenario = startScenarioCheckBox.IsChecked };
                             int rows = connection.Insert(scenario);
@@ -273,97 +277,95 @@ namespace ZuydLuister
                             if (rows != 1 + amountOfAnswers)
                             {
                                 DisplayAlert("Fout", "Er is iets misgegaan tijdens het toevoegen van het scenario. Probeer het opnieuw.", "Oke");
-                            } 
+                            }
                             else // No errors
                             {
                                 DisplayAlert("Succes", "Het scenario is succesvol toegevoegd.", "Oke");
                                 Navigation.PopAsync();
                             }
                         }
-                    }
-                } else // Editing existing scenario
-                {
-                    using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
-                    {
-                        connection.CreateTable<Scenario>();
-                        connection.CreateTable<Answer>();
-
-                        // Updating the scenario object
-                        scenario.ScenarioName = nameEntry.Text;
-                        scenario.ScenarioContent = textEditor.Text;
-                        scenario.ScenarioImage = imageEntry.Text;
-                        scenario.ScoreCategoryId = scoreCategory.ScoreCategoryId;
-                        scenario.IsStartScenario = startScenarioCheckBox.IsChecked;
-
-                        // Check if new scenario is going to be the startScenario. If so, set all scenarios in the database to IsStartScenario is false
-                        if (startScenarioCheckBox.IsChecked)
+                        else // Editing existing scenario
                         {
-                            var scenarios = connection.Table<Scenario>().ToList();
-                            var currentStartScenario = (from scenario in scenarios where scenario.IsStartScenario == true select scenario).ToList();
-                            foreach (Scenario startScenario in currentStartScenario)
+                            connection.CreateTable<Scenario>();
+                            connection.CreateTable<Answer>();
+
+                            // Updating the scenario object
+                            scenario.ScenarioName = nameEntry.Text;
+                            scenario.ScenarioContent = textEditor.Text;
+                            scenario.ScenarioImage = imageEntry.Text;
+                            scenario.ScoreCategoryId = scoreCategory.ScoreCategoryId;
+                            scenario.IsStartScenario = startScenarioCheckBox.IsChecked;
+
+                            // Check if new scenario is going to be the startScenario. If so, set all scenarios in the database to IsStartScenario is false
+                            if (startScenarioCheckBox.IsChecked)
                             {
-                                startScenario.IsStartScenario = false;
-                                connection.Update(startScenario);
+                                scenarios = connection.Table<Scenario>().ToList();
+                                var currentStartScenario = (from scenario in scenarios where scenario.IsStartScenario == true select scenario).ToList();
+                                foreach (Scenario startScenario in currentStartScenario)
+                                {
+                                    startScenario.IsStartScenario = false;
+                                    connection.Update(startScenario);
+                                }
                             }
-                        }
 
-                        int rows = connection.Update(scenario);
+                            int rows = connection.Update(scenario);
 
-                        // Delete all answers and insert them again to deal with deletion/insertion of answers (amount of answers may change)
+                            // Delete all answers and insert them again to deal with deletion/insertion of answers (amount of answers may change)
 
-                        // Find all answers from scenario and delete them
-                        var answers = connection.Table<Answer>().ToList();
-                        var scenarioAnswers = (from answer in answers where answer.ScenarioId == scenario.ScenarioId select answer).ToList();
-                        foreach (Answer answer in scenarioAnswers)
-                        {
-                            rows += connection.Delete(answer);
-                        }
-
-                        // Get amount of answers from Picker
-                        int amountOfAnswers = answerPicker.SelectedIndex + 1;
-
-                        // For each answer, create an Answer object and insert it into the database
-                        if (amountOfAnswers > 0) // Answer A
-                        {
-                            int nextScenarioId = (nextScenarioAPicker.SelectedItem as Scenario).ScenarioId;
-                            Answer answer = new Answer { AnswerContent = answerAEntry.Text, AnswerScore = Int32.Parse(pointAEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
-
-                            rows += connection.Insert(answer);
-
-                            if (amountOfAnswers > 1) // Answer B
+                            // Find all answers from scenario and delete them
+                            var answers = connection.Table<Answer>().ToList();
+                            var scenarioAnswers = (from answer in answers where answer.ScenarioId == scenario.ScenarioId select answer).ToList();
+                            foreach (Answer answer in scenarioAnswers)
                             {
-                                nextScenarioId = (nextScenarioBPicker.SelectedItem as Scenario).ScenarioId;
-                                answer = new Answer { AnswerContent = answerBEntry.Text, AnswerScore = Int32.Parse(pointBEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
+                                rows += connection.Delete(answer);
+                            }
+
+                            // Get amount of answers from Picker
+                            int amountOfAnswers = answerPicker.SelectedIndex + 1;
+
+                            // For each answer, create an Answer object and insert it into the database
+                            if (amountOfAnswers > 0) // Answer A
+                            {
+                                int nextScenarioId = (nextScenarioAPicker.SelectedItem as Scenario).ScenarioId;
+                                Answer answer = new Answer { AnswerContent = answerAEntry.Text, AnswerScore = Int32.Parse(pointAEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
 
                                 rows += connection.Insert(answer);
 
-                                if (amountOfAnswers > 2) // Answer C
+                                if (amountOfAnswers > 1) // Answer B
                                 {
-                                    nextScenarioId = (nextScenarioCPicker.SelectedItem as Scenario).ScenarioId;
-                                    answer = new Answer { AnswerContent = answerCEntry.Text, AnswerScore = Int32.Parse(pointCEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
+                                    nextScenarioId = (nextScenarioBPicker.SelectedItem as Scenario).ScenarioId;
+                                    answer = new Answer { AnswerContent = answerBEntry.Text, AnswerScore = Int32.Parse(pointBEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
 
                                     rows += connection.Insert(answer);
 
-                                    if (amountOfAnswers > 3) // Answer D
+                                    if (amountOfAnswers > 2) // Answer C
                                     {
-                                        nextScenarioId = (nextScenarioDPicker.SelectedItem as Scenario).ScenarioId;
-                                        answer = new Answer { AnswerContent = answerDEntry.Text, AnswerScore = Int32.Parse(pointDEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
+                                        nextScenarioId = (nextScenarioCPicker.SelectedItem as Scenario).ScenarioId;
+                                        answer = new Answer { AnswerContent = answerCEntry.Text, AnswerScore = Int32.Parse(pointCEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
 
                                         rows += connection.Insert(answer);
+
+                                        if (amountOfAnswers > 3) // Answer D
+                                        {
+                                            nextScenarioId = (nextScenarioDPicker.SelectedItem as Scenario).ScenarioId;
+                                            answer = new Answer { AnswerContent = answerDEntry.Text, AnswerScore = Int32.Parse(pointDEntry.Text), NextScenarioId = nextScenarioId, ScenarioId = scenario.ScenarioId };
+
+                                            rows += connection.Insert(answer);
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        // Check for errors while updating
-                        if (rows != 1 + amountOfAnswers + scenarioAnswers.Count)
-                        {
-                            DisplayAlert("Fout", "Er is iets misgegaan tijdens het bewerken van het scenario. Probeer het opnieuw.", "Oke");
-                        }
-                        else // No errors
-                        {
-                            DisplayAlert("Succes", "Het scenario is succesvol bewerkt.", "Oke");
-                            Navigation.PopAsync();
+                            // Check for errors while updating
+                            if (rows != 1 + amountOfAnswers + scenarioAnswers.Count)
+                            {
+                                DisplayAlert("Fout", "Er is iets misgegaan tijdens het bewerken van het scenario. Probeer het opnieuw.", "Oke");
+                            }
+                            else // No errors
+                            {
+                                DisplayAlert("Succes", "Het scenario is succesvol bewerkt.", "Oke");
+                                Navigation.PopAsync();
+                            }
                         }
                     }
                 }

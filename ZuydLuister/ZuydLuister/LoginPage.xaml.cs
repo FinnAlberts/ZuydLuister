@@ -45,6 +45,7 @@ namespace ZuydLuister
                     {
                         Administrator zuydLuisterAdministrator = new Administrator { AdminEmail = "luister@zuyd.nl", IsMasterAdmin = true };
                         int rows = connection.Insert(zuydLuisterAdministrator);
+                        all_administrators = connection.Table<Administrator>().ToList();
 
                         // Error reporting
                         if (rows == 0)

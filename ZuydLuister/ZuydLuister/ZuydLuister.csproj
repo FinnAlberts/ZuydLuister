@@ -11,12 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\zuyd.png" />
     <None Remove="Assets\Images\zuydluister.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Images\zuyd.png" />
     <EmbeddedResource Include="Assets\Images\zuydluister.png" />
   </ItemGroup>
 

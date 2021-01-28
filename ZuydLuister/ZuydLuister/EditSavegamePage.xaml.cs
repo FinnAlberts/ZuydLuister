@@ -33,6 +33,8 @@ namespace ZuydLuister
 
         private void saveEditSavegameButton_Clicked(object sender, EventArgs e)
         {
+
+
             // Check if everything is filled in
             if (!String.IsNullOrEmpty(savegameNameEntry.Text)) // Everything is filled in
             {
@@ -59,6 +61,7 @@ namespace ZuydLuister
 
                         selectedSavegame.SavegameName = savegameNameEntry.Text;
 
+                        bool passwordsMatch = true; // Passwords entries are matching
                         int rows = 0;
                         if (passwordCheckBox.IsChecked)
                         {
@@ -70,6 +73,7 @@ namespace ZuydLuister
                             else
                             {
                                 DisplayAlert("Fout", "De ingevulde wachtwoorden komen niet overeen.", "Oke");
+                                passwordsMatch = false;
                             }
                         }
                         else
@@ -84,10 +88,10 @@ namespace ZuydLuister
                             DisplayAlert("Succes", "Je hebt succesvol een savegame gewijzigd.", "Oke");
                             Navigation.PopAsync();
                         }
-                        else
+                        else if (passwordsMatch)
                         {
                             DisplayAlert("Fout", "Er is iets misgegaan. Probeer het nog eens.", "Oke");
-                        }
+                        }                       
                     }
                 }
             } 

@@ -23,6 +23,7 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Load categories into ListView
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
             {
                 connection.CreateTable<Scenario>();

@@ -38,7 +38,8 @@ namespace ZuydLuister
             if (savegame.ScenarioId == -1)
             {
                 Navigation.PushAsync(new ScorePage(savegame));
-            } else
+            } 
+            else // Game is not yet completed
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
@@ -55,11 +56,15 @@ namespace ZuydLuister
                     }
                     else // Scenario has not been deleted
                     {
+                        // Load data 
                         currentScenario = (from scenario in scenarios where scenario.ScenarioId == savegame.ScenarioId select scenario).ToList()[0];
                         scenarioImage.Source = currentScenario.ScenarioImage;
                         scenarioLabel.Text = currentScenario.ScenarioContent;
                         var answers = connection.Table<Answer>().ToList();
                         var currentAnswers = (from answer in answers where answer.ScenarioId == currentScenario.ScenarioId select answer).ToList();
+                        answerListView.ItemsSource = currentAnswers;
+                        
+                        // Calculate max score
                         foreach (Answer answer in currentAnswers)
                         {
                             if (maxScore < answer.AnswerScore)
@@ -67,7 +72,6 @@ namespace ZuydLuister
                                 maxScore = answer.AnswerScore;
                             }
                         }
-                        answerListView.ItemsSource = currentAnswers;
                     }
                 }
             }
@@ -85,18 +89,21 @@ namespace ZuydLuister
 
         private void answerListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            // Get selected answer
             Answer selectedAnswer = answerListView.SelectedItem as Answer;            
 
             using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
             {
+                // Get current score for category
                 connection.CreateTable<Score>();
                 var scores = connection.Table<Score>().ToList();
                 var currentScore = (from score in scores where score.SavegameId == savegame.SavegameId 
                                     && score.ScoreCategoryId == currentScenario.ScoreCategoryId select score).ToList();
 
                 int rows;
-                if (currentScore.Count == 0)
+                if (currentScore.Count == 0) // No score has yet been set
                 {
+                    // Create new score
                     Score score = new Score()
                     { AchievedScore = selectedAnswer.AnswerScore,
                       MaxScore = maxScore,
@@ -104,36 +111,43 @@ namespace ZuydLuister
                       ScoreCategoryId = currentScenario.ScoreCategoryId
                     };
                     rows = connection.Insert(score);
+                    
+                    // Error reporting
                     if (rows == 0)
                     {
                         DisplayAlert("Fout", "Er is iets misgegaan bij het aanmaken van je scores.", "Oke");
                     }
                 }
-                else
+                else // Update the current score
                 {
                     currentScore[0].AchievedScore += selectedAnswer.AnswerScore;
                     currentScore[0].MaxScore += maxScore;
                     rows = connection.Update(currentScore[0]);
 
+                    // Error reporting
                     if (rows == 0)
                     {
                         DisplayAlert("Fout", "Er is iets misgegaan bij het aanmaken van je scores.", "Oke");
                     }
                 }
+
+                // Load next scneario
                 savegame.ScenarioId = selectedAnswer.NextScenarioId;
                 connection.CreateTable<Savegame>();
                 rows = connection.Update(savegame);
+                
                 if (rows > 0)
                 {
-                    if (selectedAnswer.NextScenarioId == -1) 
+                    if (selectedAnswer.NextScenarioId == -1) // This was the last scenario, go to ScorePage
                     {
                         Navigation.PushAsync(new ScorePage(savegame));
-                    } else
+                    } 
+                    else // Go to next scenario
                     {
                         Navigation.PushAsync(new ScenarioPage(savegame));
                     }
                 }
-                else
+                else // Error reporting
                 {
                     DisplayAlert("Fout", "Er is iets misgegaan bij het updaten van je savegame.", "Oke");
                 }

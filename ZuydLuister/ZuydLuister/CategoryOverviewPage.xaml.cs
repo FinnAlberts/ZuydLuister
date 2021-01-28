@@ -22,6 +22,7 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Load categories into ListView
             using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
             {
                 connection.CreateTable<ScoreCategory>();
@@ -32,8 +33,10 @@ namespace ZuydLuister
 
         private void categorieListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            // Get category to be edited
             var selectedCategory = categoryListView.SelectedItem as ScoreCategory;
 
+            // Check if selected category is not null, else open category
             if (selectedCategory != null)
             {
                 Navigation.PushAsync(new EditCategoryPage(selectedCategory));

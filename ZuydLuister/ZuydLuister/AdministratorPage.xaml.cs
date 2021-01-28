@@ -27,15 +27,11 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Remove the AdministratorOverviewPage for non-headadmins
             if (LoginPage.permissions < 2)
             {
                 administratorPage.Children.Remove(administratorTab);
             }            
-        }
-
-        private void adminScenarioButton_Clicked(object sender, EventArgs e)
-        {
-
         }
 
         private void menuToolbarItem_Clicked(object sender, EventArgs e)

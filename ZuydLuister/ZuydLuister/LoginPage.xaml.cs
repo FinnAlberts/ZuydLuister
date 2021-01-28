@@ -23,9 +23,11 @@ namespace ZuydLuister
 
         private void loginButton_Clicked(object sender, EventArgs e)
         {
+            // Read the entries
             var UsernameEmpty = string.IsNullOrEmpty(usernameEntry.Text);
             var PasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
 
+            // Check if everything is filled in
             if (UsernameEmpty || PasswordEmpty)
             {
                 DisplayAlert("Fout", "Beide velden moeten worden ingevuld.", "Oke");
@@ -34,25 +36,29 @@ namespace ZuydLuister
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
+                    // Check if luister@zuyd.nl is registered
                     connection.CreateTable<Administrator>();
                     var all_administrators = connection.Table<Administrator>().ToList();
                     var zuydLuisterAdmins = (from administrator in all_administrators where administrator.AdminEmail == "luister@zuyd.nl" select administrator).ToList();
 
-                    if (zuydLuisterAdmins.Count == 0)
+                    if (zuydLuisterAdmins.Count == 0) // Luister@zuyd.nl is not yet registered, register now
                     {
                         Administrator zuydLuisterAdministrator = new Administrator { AdminEmail = "luister@zuyd.nl", IsMasterAdmin = true };
                         int rows = connection.Insert(zuydLuisterAdministrator);
+
+                        // Error reporting
                         if (rows == 0)
                         {
                             DisplayAlert("Fout", "Luister@zuyd.nl kon niet worden geregistreerd als beheerder.", "Oke");
                         }
                     }
 
+                    // Check if user logging in is an administrator
                     var administrators = (from administrator in all_administrators where usernameEntry.Text.ToLower() == administrator.AdminEmail select administrator).ToList();
 
-                    if (administrators.Count > 0)
+                    if (administrators.Count > 0) // User is an admin
                     {
-                        if (administrators[0].IsMasterAdmin)
+                        if (administrators[0].IsMasterAdmin) // User is masteradmin
                         {
                             permissions = 2;
                         }
@@ -61,7 +67,7 @@ namespace ZuydLuister
                             permissions = 1;
                         }
                     } 
-                    else
+                    else // User is not an admin
                     {
                         permissions = 0;
                     }

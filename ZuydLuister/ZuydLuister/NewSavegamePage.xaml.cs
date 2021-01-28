@@ -36,12 +36,13 @@ namespace ZuydLuister
                 }
             }
             
-            if (startScenarioId != 0)
+            if (startScenarioId != 0) // A StartScenario exists, continue
             {
                 // Check if name is unique
                 bool foundName = false;
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserDatabaseLocation))
                 {
+                    // Check if savegame already exists
                     connection.CreateTable<Savegame>();
                     var savegames = connection.Table<Savegame>().ToList();
                     foreach (Savegame savegame in savegames)
@@ -73,8 +74,10 @@ namespace ZuydLuister
 
                         if (passwordsMatch) // Check if passwords match
                         {
+                            // Create savegame
                             int rows = connection.Insert(savegame);
 
+                            // Error reporting
                             if (rows > 0)
                             {
                                 DisplayAlert("Succes", "Je hebt succesvol een savegame aangemaakt.", "Oke");

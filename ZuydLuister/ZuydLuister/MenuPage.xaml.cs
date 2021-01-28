@@ -27,6 +27,7 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
+            // Hide the administrator button if not enough permissions
             if (LoginPage.permissions > 0)
             {
                 adminButton.IsVisible = true;

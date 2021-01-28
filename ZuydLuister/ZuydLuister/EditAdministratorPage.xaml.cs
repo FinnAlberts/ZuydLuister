@@ -34,36 +34,42 @@ namespace ZuydLuister
         {
             base.OnAppearing();
 
-            if (!isNew)
+            // Check if this is a new administrator
+            if (!isNew) // Not new
             {
+                // Fill entries with existing data
                 emailEntry.Text = administrator.AdminEmail;
                 masterAdminCheckBox.IsChecked = administrator.IsMasterAdmin;
                 deleteAdminButton.IsVisible = true;
             } 
-            else
+            else // New
             {
+                // Hide delete button
                 deleteAdminButton.IsVisible = false;
             }
         }
 
         private void saveAdminButton_Clicked(object sender, EventArgs e)
         {
+            // Check if everything is filled in
             if (!String.IsNullOrEmpty(emailEntry.Text))
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
+                    // Check if administrator is already registered
                     connection.CreateTable<Administrator>();
                     var administrators = connection.Table<Administrator>().ToList();
 
-                    if (!isNew)
+                    if (!isNew) 
                     {
                         administrators = (from admin in administrators where administrator.AdminId != admin.AdminId select admin).ToList();
                     }
 
                     administrators = (from admin in administrators where admin.AdminEmail.ToLower() == emailEntry.Text.ToLower() select admin).ToList();
 
-                    if (administrators.Count == 0)
+                    if (administrators.Count == 0) // Administrator is not yet registered
                     {
+                        // Add administrator to database
                         int rows;
                         if (isNew)
                         {
@@ -78,6 +84,7 @@ namespace ZuydLuister
                             rows = connection.Update(administrator);
                         }
 
+                        // check for errors
                         if (rows > 0)
                         {
                             DisplayAlert("Succes", "De administrator is succesvol bijgewerkt", "Oke");
@@ -101,14 +108,17 @@ namespace ZuydLuister
 
         private async void deleteAdminButton_Clicked(object sender, EventArgs e)
         {
+            // Ask for confirmation
             var answer = await DisplayAlert("Verwijderen", "Weet je zeker dat je deze administrator wilt verwijderen?", "Nee", "Ja");
-            if (!answer)
+            if (!answer) // Deletion confirmed
             {
                 using (SQLiteConnection connection = new SQLiteConnection(App.GameDatabaseLocation))
                 {
+                    // Delete the administrator
                     connection.CreateTable<Administrator>();
                     int rows = connection.Delete(administrator);
 
+                    // Error reporting
                     if (rows > 0)
                     {
                         await DisplayAlert("Succes", "Je hebt deze administrator succesvol verwijderd.", "Oke");
